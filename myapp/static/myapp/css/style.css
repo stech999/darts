@@ -79,25 +79,24 @@ a {
 }
 
 .home_box_points {
-    font-size: 34px;
+
+    font-size: 50px;
     display: flex;
     padding: 10px 0;
+    color: #de722a;
 }
 
 .home_box_preview {
-    font-size: 24px;
     display: flex;
-    padding: 10px 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    display: flex;
+    padding: 20px 0;
+    color: #de722a;
 }
 
-.home_box_input {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    width: 50%;
-    font-size: 33px;
-}
-
+/* высплывающее окно champion */
 .champion {
     display: none;
     justify-content: center;
@@ -115,6 +114,15 @@ a {
 
 .home_center_line {
     border-right: 1px solid rgb(3, 175, 3);
+}
+
+.home_box_input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 55%;
+    font-size: 30px;
+    justify-content: center;
 }
 
 .home_box_input_btn {
