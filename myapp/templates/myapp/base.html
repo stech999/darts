@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Мой сайт{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'myapp/css/style.css' %}">
+    <script defer src="{% static 'myapp/js/points301.js' %}"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            {% include 'myapp/header.html' %}
+        </div>
+        <div class="home">
+            <main>
+                {% block content %} {% endblock %}
+            </main>
+        </div>
+        <div class="footer">
+            {% include 'myapp/footer.html' %}
+        </div>
+    </div>
+
+</body>
+
+</html>
