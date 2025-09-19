@@ -12,6 +12,8 @@ body {
     margin: 0;
 }
 
+
+
 h1 {
     color: rgb(147, 147, 221);
 }
@@ -30,7 +32,10 @@ a {
 /* -- header -- */
 
 .header {
+    display: flex;
+    justify-content: center;
     padding: 20px;
+    font-size: 24px;
 }
 
 .header_logo {
