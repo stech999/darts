@@ -72,22 +72,47 @@ a {
 
 .home_box {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     flex-direction: column;
     align-items: center;
 }
 
+.home_box_count_points {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 5px 0;
+}
+
+.home_box_name_points {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home_box_counting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home_box_counting_name {
+    font-size: 20px;
+}
+
 .home_box_name {
     font-size: 44px;
-    padding: 10px 0;
+}
+
+.home_box_line {
+    padding-right: 15px;
 }
 
 .home_box_points {
-
     font-size: 50px;
     display: flex;
-    padding: 10px 0;
     color: #de722a;
 }
 
@@ -95,10 +120,16 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 34px;
+    font-size: 26px;
+    color: #e6c455;
+}
+
+.home_box_preview_finish {
     display: flex;
-    padding: 20px 0;
-    color: #de722a;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    color: #189696;
 }
 
 /* высплывающее окно champion */
@@ -126,7 +157,7 @@ a {
     flex-wrap: wrap;
     gap: 5px;
     width: 55%;
-    font-size: 30px;
+    font-size: 26px;
     justify-content: center;
 }
 

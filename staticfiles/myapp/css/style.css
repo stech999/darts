@@ -1,0 +1,176 @@
+/* myapp/static/myapp/css/style.css */
+html,
+body {
+    font-family: Arial, sans-serif;
+    background-color: #214761;
+    color: rgb(213, 225, 235);
+    height: 100%;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+h1 {
+    color: rgb(147, 147, 221);
+}
+
+a {
+    color: rgb(3, 175, 3);
+}
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+/* -- header -- */
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    font-size: 24px;
+}
+
+.header_logo {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header_img_logo {
+    height: 150px;
+    width: auto;
+}
+
+/* -- end header -- */
+/* -- home -- */
+
+.home {
+    box-sizing: border-box;
+    flex: 1;
+    padding: 0 20px;
+}
+
+.home_center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.home_choice {
+    display: flex;
+    justify-content: center;
+}
+
+.home_box {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home_box_name {
+    font-size: 44px;
+    padding: 10px 0;
+}
+
+.home_box_points {
+
+    font-size: 50px;
+    display: flex;
+    padding: 10px 0;
+    color: #de722a;
+}
+
+.home_box_preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    display: flex;
+    padding: 20px 0;
+    color: #de722a;
+}
+
+/* высплывающее окно champion */
+.champion {
+    display: none;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 250px;
+    background-color: rgb(27 196 36 / 50%);
+    z-index: 1000;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    align-items: center;
+}
+
+.home_center_line {
+    border-right: 1px solid rgb(3, 175, 3);
+}
+
+.home_box_input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 55%;
+    font-size: 30px;
+    justify-content: center;
+}
+
+.home_box_input_btn {
+    border: 1px solid rgb(3, 175, 3);
+    padding: 5px 10px;
+}
+
+.home_box_input_btn:hover {
+    background-color: blueviolet;
+}
+
+.home_box_input_btn:active {
+    background-color: #3e8e41;
+}
+
+.home_box_buttons {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.home_box_buttons_push {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border: 1px solid rgb(3, 175, 3);
+    padding: 5px 10px;
+}
+
+.home_box_buttons_push:hover {
+    background-color: blueviolet;
+}
+
+.home_box_buttons_push:active {
+    background-color: #3e8e41;
+}
+
+/* -- end home -- */
+/* -- footer -- */
+
+.footer {
+    padding: 20px;
+}
+
+/* -- end footer -- */
