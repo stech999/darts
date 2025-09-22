@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const result_set_points = document.getElementById('result_set_points');
     const result_set_points_champion = document.getElementById('champion');
     let numberElements = document.querySelectorAll("[id^='number']");
+    let historyEl = document.getElementById('history');
     const push2_el = document.getElementById('number26');
     const push3_el = document.getElementById('number27');
     const push_clear_el = document.getElementById('number28');
@@ -9,15 +10,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let resultat = 301;
     let resultatPoints = [];
+    let clickCount = 0;
 
-    upadteScore();
+    updatePoints();
 
-    function upadteScore() {
+    function updateScore() {
         result_set_points.textContent = resultat;
     }
 
     function updatePoints(element) {
         console.log('ready: ' + element);
+    }
+
+    function updateResultDisplay() {
+        historyEl.textContent = resultatPoints.join(' | ');
     }
 
     function getPoints(pt) {
@@ -26,14 +32,24 @@ document.addEventListener('DOMContentLoaded', function () {
         return pt;
     }
 
+    function performAction() {
+        
+    }
 
     numberElements.forEach(function (el) {
         el.addEventListener('click', function () {
             let number = parseInt(this.textContent);
-            getPoints(number);
-            
+            resultatPoints.push(number);
+            updateResultDisplay();
+            clickCount++;
+
+            if (clickCount == 3) {
+                performAction();
+            }
+
         })
     })
+
 
     getPoints();
 
