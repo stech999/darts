@@ -197,6 +197,18 @@ a {
     background-color: #3e8e41;
 }
 
+.disabled_numb27 {
+    opacity: 0.6;
+    /* Делаем полупрозрачным */
+    cursor: not-allowed;
+    /* Меняем курсор на запрещающий */
+    pointer-events: none;
+    /* Запрещаем все события мыши (клики, наведение и т.д.) */
+    /* Можно добавить и другие стили, например, изменить фон */
+    background-color: #eee;
+    color: #777;
+}
+
 /* -- end home -- */
 /* -- footer -- */
 

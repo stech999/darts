@@ -8,50 +8,75 @@ document.addEventListener('DOMContentLoaded', function () {
     const push_clear_el = document.getElementById('number28');
 
 
-    let resultat = 301;
-    let resultatPoints = [];
-    let clickCount = 0;
+    let resultatScore = 301;
+    let resultatPoints = 0;
 
-    updatePoints();
-
-    function updateScore() {
-        result_set_points.textContent = resultat;
+    function updateResultatScoreDisplay() {
+        result_set_points.textContent = resultatScore;
+        choiseResultatScore();
     }
 
-    function updatePoints(element) {
-        console.log('ready: ' + element);
+    function updateResultatPointsDisplay() {
+        historyEl.textContent = resultatPoints;
     }
 
-    function updateResultDisplay() {
-        historyEl.textContent = resultatPoints.join(' | ');
+    function updateResultPoints() {
+        resultatScore -= resultatPoints;
+        if (resultatScore <= 0) {
+            resultatScore = 0;
+        }
+        updateResultatScoreDisplay();
     }
 
-    function getPoints(pt) {
-        resultatPoints.push(pt);
-        updatePoints();
-        return pt;
+    function getMultiplyBy(number) {
+        resultatScore -= resultatPoints * number - resultatPoints;
+        updateResultatScoreDisplay();
     }
 
-    function performAction() {
-        
+    function choiseResultatScore() {
+        if (resultatScore === 0) {
+            champion();
+        }
     }
+
+    function numb25True() {
+        push3_el.classList.add('disabled_numb27');
+    }
+
+    function numb25Disab() {
+        push3_el.classList.remove('disabled_numb27');
+    }
+
 
     numberElements.forEach(function (el) {
         el.addEventListener('click', function () {
-            let number = parseInt(this.textContent);
-            resultatPoints.push(number);
-            updateResultDisplay();
-            clickCount++;
-
-            if (clickCount == 3) {
-                performAction();
+            if (this.textContent <= 24) {
+                let number = parseInt(this.textContent);
+                resultatPoints = number;
+                updateResultatPointsDisplay();
+                updateResultPoints();
+                numb25Disab();
             }
+
+            else if (this.id === 'number25') {
+                resultatPoints = 25;
+                updateResultatPointsDisplay();
+                updateResultPoints();
+                numb25True();
+            }
+
+            else if (this.id === 'number26') {
+                getMultiplyBy(2);
+            }
+            else if (this.id === 'number27') {
+                getMultiplyBy(3);
+            }
+
 
         })
     })
 
-
-    getPoints();
+    updateResultatScoreDisplay();
 
 
 
