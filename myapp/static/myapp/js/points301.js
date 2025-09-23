@@ -6,9 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const champion_btn_closeEl = document.getElementById('champion_btn_close');
     let numberElements = document.querySelectorAll("[id^='number']");
     let historyEl = document.getElementById('history');
-    // const push2_el = document.getElementById('number26');
     const push3_el = document.getElementById('number27');
-    // const push_clear_el = document.getElementById('number28');
 
 
     let resultatScore = 30;
@@ -51,6 +49,13 @@ document.addEventListener('DOMContentLoaded', function () {
         push3_el.classList.remove('disabled_numb27');
     }
 
+    function historyColorText() {
+        historyEl.classList.add('home_box_preview_color');
+        setTimeout(() => {
+            historyEl.classList.remove('home_box_preview_color');
+        }, 1000);
+    }
+
     numberElements.forEach(function (el) {
         el.addEventListener('click', function () {
             if (this.textContent <= 24) {
@@ -61,15 +66,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     resultatPoints = [];
                     resultatPoints.push(number);
                 }
+
+                historyColorText();
                 updateResultPoints();
-
                 updateResultatPointsDisplay();
-
                 numb25Disab();
             }
 
             else if (this.id === 'number25') {
                 countPoints = 25;
+                resultatPoints.push(25);
+                historyColorText();
                 updateResultatPointsDisplay();
                 updateResultPoints();
                 numb25True();
@@ -117,9 +124,6 @@ document.addEventListener('DOMContentLoaded', function () {
             result_set_points_champion.style.left = left + "px";
             result_set_points_champion.style.top = top + "px";
         }
-
-
-
 
         centerWindow();
         window.addEventListener("resize", centerWindow);
