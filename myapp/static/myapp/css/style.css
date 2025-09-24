@@ -96,6 +96,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 150px;
 }
 
 .home_box_counting_name {
@@ -122,6 +123,14 @@ a {
     align-items: center;
     font-size: 26px;
     color: #e6c455;
+    height: 32px;
+}
+
+.home_box_preview_color {
+    /* transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; */
+    transition: color 0.3s ease, text-shadow 0.3s ease, background-color 0.3s ease;
+    /* box-shadow: 0 0 10px rgba(255, 200, 0, 0.7); */
+    text-shadow: 0 0 8px #e6c455;
 }
 
 .home_box_preview_finish {
@@ -129,7 +138,7 @@ a {
     justify-content: center;
     align-items: center;
     font-size: 26px;
-    color: #189696;
+    color: #de722a;
 }
 
 /* высплывающее окно champion */
@@ -137,15 +146,47 @@ a {
     display: none;
     justify-content: center;
     position: fixed;
-    top: 50%;
-    left: 50%;
     width: 500px;
     height: 250px;
-    background-color: rgb(27 196 36 / 50%);
+    background-color: #3F51B5;
     z-index: 1000;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
     align-items: center;
+
+}
+
+.champion_text {
+    position: absolute;
+    top: 5px;
+    font-size: 30px;
+}
+
+.cub_champion {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    top: 40px;
+    width: 170px;
+    height: 150px;
+    align-items: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* background-image: url("{% static '../images/cub_champion.png' %}"); */
+    background-image: url(../images/cub_champion.png);
+}
+
+.champion_btn_close {
+    position: absolute;
+    bottom: 20px;
+    left: 208px;
+    border: 1px solid rgb(3, 175, 3);
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+.champion_btn_close:hover {
+    background-color: blueviolet;
 }
 
 .home_center_line {
