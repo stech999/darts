@@ -126,10 +126,14 @@ a {
     height: 32px;
 }
 
-.home_box_preview_color {
-    /* transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; */
+.home_box_preview_error {
     transition: color 0.3s ease, text-shadow 0.3s ease, background-color 0.3s ease;
-    /* box-shadow: 0 0 10px rgba(255, 200, 0, 0.7); */
+    color: #ff1500;
+}
+
+
+.home_box_preview_color {
+    transition: color 0.3s ease, text-shadow 0.3s ease, background-color 0.3s ease;
     text-shadow: 0 0 8px #e6c455;
 }
 
@@ -172,7 +176,6 @@ a {
     align-items: center;
     background-size: contain;
     background-repeat: no-repeat;
-    /* background-image: url("{% static '../images/cub_champion.png' %}"); */
     background-image: url(../images/cub_champion.png);
 }
 

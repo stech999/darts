@@ -23,11 +23,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateResultPoints() {
-        resultatScore -= countPoints;
-        if (resultatScore <= 0) {
+
+        if (countPoints >= resultatScore) {
+            historyEl.classList.remove('home_box_preview_color');
+            setTimeout(() => {
+                historyEl.classList.add('home_box_preview_error');
+            }, 1000);
+            setTimeout(() => {
+                historyEl.classList.remove('home_box_preview_error');
+            }, 3000)
+        }
+
+        else if (resultatScore <= 0) {
             resultatScore = 0;
         }
 
+        else {
+            resultatScore -= countPoints;
+        }
         updateResultatScoreDisplay();
     }
 
