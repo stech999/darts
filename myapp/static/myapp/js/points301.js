@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     let resultatScore = 301;
-    let resultatPoints = 0;
+    let resultatPoints = [];
 
     function updateResultatScoreDisplay() {
         result_set_points.textContent = resultatScore;
@@ -21,10 +21,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateResultPoints() {
+        // resultatPoints.map((element) => {
+        //     resultatScore -= element;
+        // })
+
+        console.log(resultatPoints.join(' | '));
         resultatScore -= resultatPoints;
+
         if (resultatScore <= 0) {
             resultatScore = 0;
         }
+
         updateResultatScoreDisplay();
     }
 
@@ -47,12 +54,25 @@ document.addEventListener('DOMContentLoaded', function () {
         push3_el.classList.remove('disabled_numb27');
     }
 
+    function resetCountPoint() {
+        updateResultPoints();
+    }
+
 
     numberElements.forEach(function (el) {
         el.addEventListener('click', function () {
             if (this.textContent <= 24) {
                 let number = parseInt(this.textContent);
-                resultatPoints = number;
+                resultatPoints.push(number);
+                if (resultatPoints.length > 3) {
+                    resultatPoints = [];
+                    resultatPoints.push(number);
+                }
+
+                // if (resultatPoints.length === 3) {
+                //     resetCountPoint();
+                // }
+
                 updateResultatPointsDisplay();
                 updateResultPoints();
                 numb25Disab();
