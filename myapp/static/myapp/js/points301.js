@@ -38,6 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // function typeNumber(point) {
+    //     if (point === ) {
+
+    //     }
+    // }
+
     function updateResultPoints() {
         resultatScore -= countPoints;
         if (resultatScore <= 0) {
@@ -46,9 +52,18 @@ document.addEventListener('DOMContentLoaded', function () {
         updateResultatScoreDisplay();
     }
 
-    function getMultiplyBy(number) {
-        resultatScore -= countPoints * number - countPoints;
-        updateResultatScoreDisplay();
+    function getMultiplyBy(milti) {
+        numberElements.forEach(function (el) {
+            el.addEventListener('click', function () {
+                let number = parseInt(this.textContent);
+                let points = resultatScore - number * milti;
+                resultatScore -= points;
+                console.log(points);
+                resultatPoints.push(resultatPoints);
+                updateResultatScoreDisplay();
+                previewScorePoints();
+            })
+        })
     }
 
     function choiseResultatScore() {
@@ -75,12 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
     numberElements.forEach(function (el) {
         el.addEventListener('click', function () {
             if (this.textContent <= 24) {
-                let number = parseInt(this.textContent);
-                resultatPoints.push(number);
-                countPoints = number;
+                // let number = parseInt(this.textContent);
+                resultatPoints.push(this.textContent);
+                countPoints = this.textContent;
                 if (resultatPoints.length > 3) {
                     resultatPoints = [];
-                    resultatPoints.push(number);
+                    resultatPoints.push(this.textContent);
                 }
 
                 historyColorText();
