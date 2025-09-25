@@ -7,9 +7,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let numberElements = document.querySelectorAll("[id^='number']");
     let historyEl = document.getElementById('history');
     const push3_el = document.getElementById('number27');
+    const home_box_countingEl = document.getElementById('home_box_counting')
+    const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
 
 
-    let resultatScore = 30;
+    const initialScore = 60;
+    let resultatScore = 60;
     let resultatPoints = [];
     let countPoints = 0;
 
@@ -20,6 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateResultatPointsDisplay() {
         historyEl.textContent = resultatPoints.join(' | ');
+    }
+
+    function previewScorePoints() {
+        if (resultatScore % 2 === 0 && resultatScore <= 50) {
+            home_box_countingEl.style.display = 'flex';
+            home_box_preview_finishEl.classList.add('blinking-active');
+            home_box_preview_finishEl.textContent = resultatScore / 2;
+        }
+        else {
+            home_box_countingEl.style.display = 'none';
+            home_box_preview_finishEl.classList.remove('blinking-active');
+            home_box_preview_finishEl.textContent = '';
+        }
     }
 
     function updateResultPoints() {
@@ -70,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 historyColorText();
                 updateResultPoints();
                 updateResultatPointsDisplay();
+                previewScorePoints();
                 numb25Disab();
             }
 
@@ -93,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     updateResultatScoreDisplay();
-
+    previewScorePoints();
 
 
     // numberElements.forEach((element, index) => {
@@ -131,9 +148,10 @@ document.addEventListener('DOMContentLoaded', function () {
         champion_btn_closeEl.addEventListener('click', function () {
             result_set_points_champion.style.display = 'none';
             resultatPoints = [];
-            resultatScore = 30;
+            resultatScore = initialScore;
             result_set_points.textContent = resultatScore;
             updateResultatPointsDisplay();
+            previewScorePoints();
             numb25Disab();
         });
     }
