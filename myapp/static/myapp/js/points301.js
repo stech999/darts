@@ -12,9 +12,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     const initialScore = 60;
+
+    let functionActive = true;
     let resultatScore = 60;
     let resultatPoints = [];
     let countPoints = 0;
+    let storeResultat = 0;
 
     function updateResultatScoreDisplay() {
         result_set_points.textContent = resultatScore;
@@ -56,14 +59,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 3000)
         }
 
-        else if (resultatScore <= 0) {
-            resultatScore = 0;
-        }
+        // else if (resultatScore <= 0) {
+        //     resultatScore = 0;
+        // }
 
-        else {
-            resultatScore -= countPoints;
-        }
-        updateResultatScoreDisplay();
+        // else {
+        //     resultatScore -= countPoints;
+        // }
+        // updateResultatScoreDisplay();
     }
 
     function getMultiplyBy(milti) {
@@ -72,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 let number = parseInt(this.textContent);
                 let points = resultatScore - number * milti;
                 resultatScore -= points;
-                console.log(points);
                 resultatPoints.push(resultatPoints);
                 updateResultatScoreDisplay();
                 previewScorePoints();
@@ -103,21 +105,56 @@ document.addEventListener('DOMContentLoaded', function () {
 
     numberElements.forEach(function (el) {
         el.addEventListener('click', function () {
-            if (this.textContent <= 24) {
-                // let number = parseInt(this.textContent);
-                resultatPoints.push(this.textContent);
-                countPoints = this.textContent;
-                if (resultatPoints.length > 3) {
-                    resultatPoints = [];
-                    resultatPoints.push(this.textContent);
-                }
+            if (functionActive) {
+                if (this.textContent <= 24) {
+                    resultatPoints.push(parseInt(this.textContent));
+                    if (resultatPoints.length <= 3) {
+                        storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+                    }
 
-                historyColorText();
-                updateResultPoints();
-                updateResultatPointsDisplay();
-                previewScorePoints();
-                numb25Disab();
+                    else if (resultatPoints.length > 3) {
+                        resultatPoints = [];
+
+                        resultatPoints.push(this.textContent);
+                        storeResultat = 0;
+                    }
+
+                    else if (resultatScore <= this.textContent) {
+                        // resultatScore = resultatScore - storeResultat;
+                        console.log(resultatScore);
+                        updateResultPoints();
+                        updateResultatScoreDisplay();
+                        // resultatScore -= storeResultat;
+                    }
+
+                    else if (resultatScore <= 0) {
+                        resultatScore = 0;
+                    }
+                    // let number = parseInt(this.textContent);
+                    console.log(`storeResultat: ${storeResultat}`);
+
+                    countPoints = this.textContent;
+                    resultatScore -= this.textContent;
+
+
+
+
+                    updateResultatScoreDisplay();
+                    historyColorText();
+                    // updateResultPoints();
+                    updateResultatPointsDisplay();
+                    previewScorePoints();
+                    numb25Disab();
+                }
             }
+
+            else if (!functionActive) {
+
+            }
+            // else {
+            //     console.log('else');
+            // }
+
 
             else if (this.id === 'number25') {
                 countPoints = 25;
