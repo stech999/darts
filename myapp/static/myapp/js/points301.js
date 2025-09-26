@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
 
 
-    const initialScore = 60;
+    const initialScore = 30;
 
     let functionActive = true;
-    let resultatScore = 60;
+    let resultatScore = 30;
     let resultatPoints = [];
     let countPoints = 0;
     let storeResultat = 0;
@@ -47,27 +47,18 @@ document.addEventListener('DOMContentLoaded', function () {
     //     }
     // }
 
-    function updateResultPoints() {
+    // function updateResultPoints() {
+    //     if (countPoints >= resultatScore) {
+    //         historyEl.classList.remove('home_box_preview_color');
+    //         setTimeout(() => {
+    //             historyEl.classList.add('home_box_preview_error');
+    //         }, 1000);
+    //         setTimeout(() => {
+    //             historyEl.classList.remove('home_box_preview_error');
+    //         }, 3000)
+    //     }
 
-        if (countPoints >= resultatScore) {
-            historyEl.classList.remove('home_box_preview_color');
-            setTimeout(() => {
-                historyEl.classList.add('home_box_preview_error');
-            }, 1000);
-            setTimeout(() => {
-                historyEl.classList.remove('home_box_preview_error');
-            }, 3000)
-        }
-
-        // else if (resultatScore <= 0) {
-        //     resultatScore = 0;
-        // }
-
-        // else {
-        //     resultatScore -= countPoints;
-        // }
-        // updateResultatScoreDisplay();
-    }
+    // }
 
     function getMultiplyBy(milti) {
         numberElements.forEach(function (el) {
@@ -83,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function choiseResultatScore() {
-        if (resultatScore === 0) {
+        if (resultatScore == 0) {
             champion();
         }
     }
@@ -107,36 +98,30 @@ document.addEventListener('DOMContentLoaded', function () {
         el.addEventListener('click', function () {
             if (functionActive) {
                 if (this.textContent <= 24) {
-                    resultatPoints.push(parseInt(this.textContent));
+                    let points = parseInt(this.textContent);
+                    resultatPoints.push(points);
+
+                    if (resultatPoints.length > 3) {
+                        resultatPoints = [];
+                        storeResultat = 0;
+                        storeResultat = resultatPoints.push(points);
+                    }
+
                     if (resultatPoints.length <= 3) {
                         storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
                     }
 
-                    else if (resultatPoints.length > 3) {
+                    if (points > resultatScore) {
+                        resultatScore = resultatScore + storeResultat;
                         resultatPoints = [];
-
-                        resultatPoints.push(this.textContent);
                         storeResultat = 0;
+
+                        // updateResultPoints();
+                        // updateResultatScoreDisplay();
                     }
 
-                    else if (resultatScore <= this.textContent) {
-                        // resultatScore = resultatScore - storeResultat;
-                        console.log(resultatScore);
-                        updateResultPoints();
-                        updateResultatScoreDisplay();
-                        // resultatScore -= storeResultat;
-                    }
-
-                    else if (resultatScore <= 0) {
-                        resultatScore = 0;
-                    }
-                    // let number = parseInt(this.textContent);
-                    console.log(`storeResultat: ${storeResultat}`);
-
-                    countPoints = this.textContent;
-                    resultatScore -= this.textContent;
-
-
+                    countPoints = points
+                    resultatScore -= points;
 
 
                     updateResultatScoreDisplay();
@@ -145,6 +130,38 @@ document.addEventListener('DOMContentLoaded', function () {
                     updateResultatPointsDisplay();
                     previewScorePoints();
                     numb25Disab();
+                }
+
+                if (this.textContent == 25) {
+                    let points = parseInt(this.textContent);
+                    resultatPoints.push(points);
+
+
+                    if (resultatPoints.length > 3) {
+                        resultatPoints = [];
+                        storeResultat = 0;
+                        storeResultat = resultatPoints.push(points);
+                    }
+
+                    if (resultatPoints.length <= 3) {
+                        storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+                    }
+
+                    if (points >= resultatScore) {
+                        resultatScore = resultatScore + storeResultat;
+                        resultatPoints = [];
+                        storeResultat = 0;
+                    }
+
+                    countPoints = 25;
+                    resultatScore -= points;
+
+                    updateResultatScoreDisplay();
+                    numb25True();
+                    historyColorText();
+                    updateResultatPointsDisplay();
+                    // updateResultPoints();
+                    previewScorePoints();
                 }
             }
 
@@ -156,14 +173,14 @@ document.addEventListener('DOMContentLoaded', function () {
             // }
 
 
-            else if (this.id === 'number25') {
-                countPoints = 25;
-                resultatPoints.push(25);
-                historyColorText();
-                updateResultatPointsDisplay();
-                updateResultPoints();
-                numb25True();
-            }
+            // else if (this.id === 'number25') {
+            //     countPoints = 25;
+            //     resultatPoints.push(25);
+            //     historyColorText();
+            //     updateResultatPointsDisplay();
+            //     updateResultPoints();
+            //     numb25True();
+            // }
 
             else if (this.id === 'number26') {
                 getMultiplyBy(2);
