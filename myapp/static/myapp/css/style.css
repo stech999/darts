@@ -92,6 +92,59 @@ a {
     align-items: center;
 }
 
+.home_box_counting_points {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+}
+
+.blinking-number {
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    animation-name: blink;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+
+@keyframes blink {
+    0% {
+        /* Начальное состояние */
+        opacity: 1;
+        /* Полностью видимо */
+        color: #e4c86d;
+        /* background-color: #fce4ec; */
+        transform: scale(1);
+        /* Исходный размер */
+    }
+
+    50% {
+        /* Середина анимации (когда должно быть невидимо или тускло) */
+        opacity: 0.4;
+        /* Полупрозрачно */
+        color: #e4b418;
+        /* Темнее */
+        /* background-color: #f8bbd0; */
+        /* Темнее фон */
+        transform: scale(1.30);
+        /* Слегка увеличить */
+    }
+
+    100% {
+        /* Конец анимации (возврат к видимому состоянию) */
+        opacity: 1;
+        color: #e4c86d;
+        /* background-color: #fce4ec; */
+        transform: scale(1);
+    }
+}
+
+.blinking-active {
+    animation-play-state: running;
+    /* Запускаем анимацию */
+}
+
 .home_box_counting {
     display: flex;
     flex-direction: column;
@@ -142,7 +195,8 @@ a {
     justify-content: center;
     align-items: center;
     font-size: 26px;
-    color: #de722a;
+    color: #e6c455;
+    height: 32px;
 }
 
 /* высплывающее окно champion */
