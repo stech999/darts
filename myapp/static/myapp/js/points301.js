@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const champion_btn_closeEl = document.getElementById('champion_btn_close');
     let numberElements = document.querySelectorAll("[id^='number']");
     let historyEl = document.getElementById('history');
-    const push3_el = document.getElementById('number27');
+    const multi2_el = document.getElementById('multi2');
+    const multi3_el = document.getElementById('multi3');
     const home_box_countingEl = document.getElementById('home_box_counting')
     const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
 
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const initialScore = 30;
 
     let functionActive = true;
+
     let resultatScore = 30;
     let resultatPoints = [];
     let countPoints = 0;
@@ -41,12 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // function typeNumber(point) {
-    //     if (point === ) {
-
-    //     }
-    // }
-
     // function updateResultPoints() {
     //     if (countPoints >= resultatScore) {
     //         historyEl.classList.remove('home_box_preview_color');
@@ -60,18 +56,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // }
 
-    function getMultiplyBy(milti) {
-        numberElements.forEach(function (el) {
-            el.addEventListener('click', function () {
-                let number = parseInt(this.textContent);
-                let points = resultatScore - number * milti;
-                resultatScore -= points;
-                resultatPoints.push(resultatPoints);
-                updateResultatScoreDisplay();
-                previewScorePoints();
-            })
-        })
-    }
+    // function getMultiplyBy(milti) {
+    //     numberElements.forEach(function (el) {
+    //         el.addEventListener('click', function () {
+    //             let number = parseInt(this.textContent);
+    //             let points = resultatScore - number * milti;
+    //             resultatScore -= points;
+    //             resultatPoints.push(resultatPoints);
+    //             updateResultatScoreDisplay();
+    //             previewScorePoints();
+    //         })
+    //     })
+    // }
 
     function choiseResultatScore() {
         if (resultatScore == 0) {
@@ -80,11 +76,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function numb25True() {
-        push3_el.classList.add('disabled_numb27');
+        multi3_el.classList.add('disabled_numb27');
     }
 
     function numb25Disab() {
-        push3_el.classList.remove('disabled_numb27');
+        multi3_el.classList.remove('disabled_numb27');
     }
 
     function historyColorText() {
@@ -94,103 +90,283 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000);
     }
 
-    numberElements.forEach(function (el) {
-        el.addEventListener('click', function () {
-            if (functionActive) {
-                if (this.textContent <= 24) {
-                    let points = parseInt(this.textContent);
-                    resultatPoints.push(points);
 
-                    if (resultatPoints.length > 3) {
-                        resultatPoints = [];
-                        storeResultat = 0;
-                        storeResultat = resultatPoints.push(points);
-                    }
+    // numberElements.forEach(function (el) {
+    //     el.addEventListener('click', function () {
+    //         console.log('functionActive: ' + functionActive);
+    //         if (functionActive === true) {
 
-                    if (resultatPoints.length <= 3) {
-                        storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-                    }
+    //             if (this.textContent <= 24) {
+    //                 let points = parseInt(this.textContent);
+    //                 resultatPoints.push(points);
 
-                    if (points > resultatScore) {
-                        resultatScore = resultatScore + storeResultat;
-                        resultatPoints = [];
-                        storeResultat = 0;
+    //                 if (resultatPoints.length > 3) {
+    //                     resultatPoints = [];
+    //                     storeResultat = 0;
+    //                     storeResultat = resultatPoints.push(points);
+    //                 }
 
-                        // updateResultPoints();
-                        // updateResultatScoreDisplay();
-                    }
+    //                 if (resultatPoints.length <= 3) {
+    //                     storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+    //                 }
 
-                    countPoints = points
-                    resultatScore -= points;
+    //                 if (points > resultatScore) {
+    //                     resultatScore = resultatScore + storeResultat;
+    //                     resultatPoints = [];
+    //                     storeResultat = 0;
+    //                 }
 
+    //                 // countPoints = points;
+    //                 resultatScore -= points;
 
-                    updateResultatScoreDisplay();
-                    historyColorText();
-                    // updateResultPoints();
-                    updateResultatPointsDisplay();
-                    previewScorePoints();
-                    numb25Disab();
+    //                 updateResultatScoreDisplay();
+    //                 historyColorText();
+    //                 // updateResultPoints();
+    //                 updateResultatPointsDisplay();
+    //                 previewScorePoints();
+    //                 numb25Disab();
+
+    //                 console.log(`function1`);
+    //             }
+
+    //             if (this.textContent == 25) {
+    //                 let points = parseInt(this.textContent);
+    //                 resultatPoints.push(points);
+
+    //                 if (resultatPoints.length > 3) {
+    //                     resultatPoints = [];
+    //                     storeResultat = 0;
+    //                     storeResultat = resultatPoints.push(points);
+    //                 }
+
+    //                 if (resultatPoints.length <= 3) {
+    //                     storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+    //                 }
+
+    //                 if (points >= resultatScore) {
+    //                     resultatScore = resultatScore + storeResultat;
+    //                     resultatPoints = [];
+    //                     storeResultat = 0;
+    //                 }
+
+    //                 // countPoints = 25;
+    //                 resultatScore -= points;
+
+    //                 updateResultatScoreDisplay();
+    //                 numb25True();
+    //                 historyColorText();
+    //                 updateResultatPointsDisplay();
+    //                 // updateResultPoints();
+    //                 previewScorePoints();
+    //             }
+
+    //             console.log('f1: ' + this.textContent);
+    //         }
+
+    //     })
+
+    // })
+
+    function minusPoints(point) {
+        if (point <= 24) {
+            let points = parseInt(point) * 2;
+            resultatPoints.push(points);
+
+            resultatScore -= points;
+
+            updateResultatScoreDisplay();
+            historyColorText();
+            // updateResultPoints();
+            updateResultatPointsDisplay();
+            previewScorePoints();
+            numb25Disab();
+            functionActive = true;
+            proverkaLengthPoints(points);
+            console.log(`resultatScore: ${resultatScore}`);
+        }
+    }
+
+    function proverkaLengthPoints(points) { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
+        if (resultatPoints.length > 3) {
+            console.log('object1');
+            resultatPoints = [];
+            storeResultat = 0;
+            storeResultat = resultatPoints.push(points);
+            return storeResultat;
+        }
+
+        if (resultatPoints.length <= 3) { //  если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
+            storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+            console.log('object2: ' + storeResultat);
+            return storeResultat;
+        }
+
+        if (points > resultatScore) { // если очков быльше общей суммы, мы возвращаем сумму, а очки обнуляем
+            console.log('object3');
+            resultatScore = resultatScore + storeResultat;
+            resultatPoints = [];
+            storeResultat = 0;
+        }
+    }
+
+    multi2_el.addEventListener('click', function () {
+
+        functionActive = !functionActive;
+
+        numberElements.forEach(function (el) {
+            el.addEventListener('click', function () {
+                if (functionActive === false) {
+                    minusPoints(this.textContent);
                 }
+            })
 
-                if (this.textContent == 25) {
-                    let points = parseInt(this.textContent);
-                    resultatPoints.push(points);
-
-
-                    if (resultatPoints.length > 3) {
-                        resultatPoints = [];
-                        storeResultat = 0;
-                        storeResultat = resultatPoints.push(points);
-                    }
-
-                    if (resultatPoints.length <= 3) {
-                        storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-                    }
-
-                    if (points >= resultatScore) {
-                        resultatScore = resultatScore + storeResultat;
-                        resultatPoints = [];
-                        storeResultat = 0;
-                    }
-
-                    countPoints = 25;
-                    resultatScore -= points;
-
-                    updateResultatScoreDisplay();
-                    numb25True();
-                    historyColorText();
-                    updateResultatPointsDisplay();
-                    // updateResultPoints();
-                    previewScorePoints();
-                }
-            }
-
-            else if (!functionActive) {
-
-            }
-            // else {
-            //     console.log('else');
-            // }
+            // if (this.textContent == 25) {
+            //     let points = parseInt(this.textContent);
+            //     resultatPoints.push(points);
 
 
-            // else if (this.id === 'number25') {
-            //     countPoints = 25;
-            //     resultatPoints.push(25);
+            //     if (resultatPoints.length > 3) {
+            //         resultatPoints = [];
+            //         storeResultat = 0;
+            //         storeResultat = resultatPoints.push(points);
+            //     }
+
+            //     if (resultatPoints.length <= 3) {
+            //         storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+            //     }
+
+            //     if (points >= resultatScore) {
+            //         resultatScore = resultatScore + storeResultat;
+            //         resultatPoints = [];
+            //         storeResultat = 0;
+            //     }
+
+            //     // countPoints = 25;
+            //     resultatScore -= points;
+
+            //     updateResultatScoreDisplay();
+            //     numb25True();
             //     historyColorText();
             //     updateResultatPointsDisplay();
-            //     updateResultPoints();
-            //     numb25True();
+            //     // updateResultPoints();
+            //     previewScorePoints();
             // }
-
-            else if (this.id === 'number26') {
-                getMultiplyBy(2);
-            }
-            else if (this.id === 'number27') {
-                getMultiplyBy(3);
-            }
-
         })
+
     })
+
+
+
+    // if (!functionActive) {
+
+    //     console.log(`textContent * 2: ${this.textContent}`);
+    //     if (this.textContent <= 24) {
+    //         let points = parseInt(this.textContent) * 2;
+
+    //         resultatPoints.push(points);
+
+    //         if (resultatPoints.length > 3) {
+    //             resultatPoints = [];
+    //             storeResultat = 0;
+    //             storeResultat = resultatPoints.push(points);
+    //         }
+
+    //         if (resultatPoints.length <= 3) {
+    //             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+    //         }
+
+    //         if (points > resultatScore) {
+    //             resultatScore = resultatScore + storeResultat;
+    //             resultatPoints = [];
+    //             storeResultat = 0;
+    //         }
+
+    //         countPoints = points;
+    //         resultatScore -= points;
+
+
+    //         updateResultatScoreDisplay();
+    //         historyColorText();
+    //         // updateResultPoints();
+    //         updateResultatPointsDisplay();
+    //         previewScorePoints();
+    //         numb25Disab();
+    //     }
+
+    //     if (this.textContent == 25) {
+    //         let points = parseInt(this.textContent);
+    //         resultatPoints.push(points);
+
+
+    //         if (resultatPoints.length > 3) {
+    //             resultatPoints = [];
+    //             storeResultat = 0;
+    //             storeResultat = resultatPoints.push(points);
+    //         }
+
+    //         if (resultatPoints.length <= 3) {
+    //             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+    //         }
+
+    //         if (points >= resultatScore) {
+    //             resultatScore = resultatScore + storeResultat;
+    //             resultatPoints = [];
+    //             storeResultat = 0;
+    //         }
+
+    //         countPoints = 25;
+    //         resultatScore -= points;
+
+    //         updateResultatScoreDisplay();
+    //         numb25True();
+    //         historyColorText();
+    //         updateResultatPointsDisplay();
+    //         // updateResultPoints();
+    //         previewScorePoints();
+    //     }
+
+    //     // console.log(`button: ${this.textContent}`);
+
+    //     // let number = parseInt(this.id);
+    //     // let points = resultatScore - number * 2;
+    //     // resultatPoints.push(points);
+
+    //     // if (resultatPoints.length > 3) {
+    //     //     resultatPoints = [];
+    //     //     storeResultat = 0;
+    //     //     storeResultat = resultatPoints.push(points);
+    //     // }
+
+    //     // if (resultatPoints.length <= 3) {
+    //     //     storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+    //     // }
+
+    //     // if (points > resultatScore) {
+    //     //     resultatScore = resultatScore + storeResultat;
+    //     //     resultatPoints = [];
+    //     //     storeResultat = 0;
+    //     // }
+
+    //     // countPoints = points;
+
+    //     // updateResultatScoreDisplay();
+    //     // historyColorText();
+    //     // // updateResultPoints();
+    //     // updateResultatPointsDisplay();
+    //     // previewScorePoints();
+    //     // numb25Disab();
+    //     functionActive = true;
+    // }
+
+
+
+
+
+    // if (this.id === 'number27') {
+    //     getMultiplyBy(3);
+    // }
+
+
 
     updateResultatScoreDisplay();
     previewScorePoints();
