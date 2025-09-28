@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cub_championEl = document.getElementById('cub_champion');
     const champion_btn_closeEl = document.getElementById('champion_btn_close');
     let numberElements = document.querySelectorAll("[id^='number']");
+    const number25El = document.getElementById('number25');
     let historyEl = document.getElementById('history');
     const multi2_el = document.getElementById('multi2');
     const multi3_el = document.getElementById('multi3');
@@ -12,13 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
 
 
-    const initialScore = 30;
+    const initialScore = 60;
 
     let functionActive = true;
 
-    let resultatScore = 30;
+    let resultatScore = 60;
     let resultatPoints = [];
-    let countPoints = 0;
+    let point25 = false;
     let storeResultat = 0;
 
     function updateResultatScoreDisplay() {
@@ -76,11 +77,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function numb25True() {
-        multi3_el.classList.add('disabled_numb27');
-    }
-
-    function numb25Disab() {
-        multi3_el.classList.remove('disabled_numb27');
+        if (point25 == true) {
+            number25El.classList.add('disabled_numb27');
+        } else {
+            number25El.classList.remove('disabled_numb27');
+        }
     }
 
     function historyColorText() {
@@ -167,11 +168,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // })
 
-    function minusPoints(point) {
-        if (point <= 24) {
-            let points = parseInt(point) * 2;
-            resultatPoints.push(points);
+    function minusPoints(point, multi) {
+        if (point <= 25) {
 
+            let points = parseInt(point) * multi;
+            resultatPoints.push(points);
+            console.log(`multi: ${multi}`);
             resultatScore -= points;
 
             updateResultatScoreDisplay();
@@ -179,198 +181,87 @@ document.addEventListener('DOMContentLoaded', function () {
             // updateResultPoints();
             updateResultatPointsDisplay();
             previewScorePoints();
-            numb25Disab();
             functionActive = true;
             proverkaLengthPoints(points);
-            console.log(`resultatScore: ${resultatScore}`);
         }
     }
 
     function proverkaLengthPoints(points) { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
-        if (resultatPoints.length > 3) {
-            console.log('object1');
+        if (resultatPoints.length > 2) {
             resultatPoints = [];
             storeResultat = 0;
-            storeResultat = resultatPoints.push(points);
             return storeResultat;
         }
 
         if (resultatPoints.length <= 3) { //  если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-            console.log('object2: ' + storeResultat);
             return storeResultat;
         }
 
         if (points > resultatScore) { // если очков быльше общей суммы, мы возвращаем сумму, а очки обнуляем
-            console.log('object3');
             resultatScore = resultatScore + storeResultat;
             resultatPoints = [];
             storeResultat = 0;
         }
     }
 
-    multi2_el.addEventListener('click', function () {
+    numberElements.forEach(function (el) {
+        el.addEventListener('click', function () {
+            if (functionActive === true) {
+                if (el.textContent <= 25) {
+                    minusPoints(this.textContent, 1);
 
+                    functionActive = true;
+                    point25 = false;
+                    numb25True();
+                    console.log(`el.textContent: ${el.textContent}`);
+                }
+            }
+        })
+    })
+
+    multi2_el.addEventListener('click', function () {
+        point25 = false;
+        numb25True();
         functionActive = !functionActive;
 
         numberElements.forEach(function (el) {
             el.addEventListener('click', function () {
                 if (functionActive === false) {
-                    minusPoints(this.textContent);
+
+                    minusPoints(this.textContent, 2);
+                    console.log(`push: 2x`);
+                    
                 }
             })
-
-            // if (this.textContent == 25) {
-            //     let points = parseInt(this.textContent);
-            //     resultatPoints.push(points);
-
-
-            //     if (resultatPoints.length > 3) {
-            //         resultatPoints = [];
-            //         storeResultat = 0;
-            //         storeResultat = resultatPoints.push(points);
-            //     }
-
-            //     if (resultatPoints.length <= 3) {
-            //         storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-            //     }
-
-            //     if (points >= resultatScore) {
-            //         resultatScore = resultatScore + storeResultat;
-            //         resultatPoints = [];
-            //         storeResultat = 0;
-            //     }
-
-            //     // countPoints = 25;
-            //     resultatScore -= points;
-
-            //     updateResultatScoreDisplay();
-            //     numb25True();
-            //     historyColorText();
-            //     updateResultatPointsDisplay();
-            //     // updateResultPoints();
-            //     previewScorePoints();
-            // }
         })
-
     })
 
+    multi3_el.addEventListener('click', function () {
 
+        functionActive = false;
 
-    // if (!functionActive) {
+        if (this.id == 'multi3') {
+            point25 = true;
+            numb25True();
+        }
+        console.log(`this.id: ${this.id}`);
 
-    //     console.log(`textContent * 2: ${this.textContent}`);
-    //     if (this.textContent <= 24) {
-    //         let points = parseInt(this.textContent) * 2;
+        numberElements.forEach(function (el) {
+            el.addEventListener('click', function () {
+                if (functionActive === false) {
 
-    //         resultatPoints.push(points);
+                    minusPoints(this.textContent, 3);
 
-    //         if (resultatPoints.length > 3) {
-    //             resultatPoints = [];
-    //             storeResultat = 0;
-    //             storeResultat = resultatPoints.push(points);
-    //         }
+                    console.log(`push: 3x`);
+                }
+            })
+        })
+    })
 
-    //         if (resultatPoints.length <= 3) {
-    //             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-    //         }
-
-    //         if (points > resultatScore) {
-    //             resultatScore = resultatScore + storeResultat;
-    //             resultatPoints = [];
-    //             storeResultat = 0;
-    //         }
-
-    //         countPoints = points;
-    //         resultatScore -= points;
-
-
-    //         updateResultatScoreDisplay();
-    //         historyColorText();
-    //         // updateResultPoints();
-    //         updateResultatPointsDisplay();
-    //         previewScorePoints();
-    //         numb25Disab();
-    //     }
-
-    //     if (this.textContent == 25) {
-    //         let points = parseInt(this.textContent);
-    //         resultatPoints.push(points);
-
-
-    //         if (resultatPoints.length > 3) {
-    //             resultatPoints = [];
-    //             storeResultat = 0;
-    //             storeResultat = resultatPoints.push(points);
-    //         }
-
-    //         if (resultatPoints.length <= 3) {
-    //             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-    //         }
-
-    //         if (points >= resultatScore) {
-    //             resultatScore = resultatScore + storeResultat;
-    //             resultatPoints = [];
-    //             storeResultat = 0;
-    //         }
-
-    //         countPoints = 25;
-    //         resultatScore -= points;
-
-    //         updateResultatScoreDisplay();
-    //         numb25True();
-    //         historyColorText();
-    //         updateResultatPointsDisplay();
-    //         // updateResultPoints();
-    //         previewScorePoints();
-    //     }
-
-    //     // console.log(`button: ${this.textContent}`);
-
-    //     // let number = parseInt(this.id);
-    //     // let points = resultatScore - number * 2;
-    //     // resultatPoints.push(points);
-
-    //     // if (resultatPoints.length > 3) {
-    //     //     resultatPoints = [];
-    //     //     storeResultat = 0;
-    //     //     storeResultat = resultatPoints.push(points);
-    //     // }
-
-    //     // if (resultatPoints.length <= 3) {
-    //     //     storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-    //     // }
-
-    //     // if (points > resultatScore) {
-    //     //     resultatScore = resultatScore + storeResultat;
-    //     //     resultatPoints = [];
-    //     //     storeResultat = 0;
-    //     // }
-
-    //     // countPoints = points;
-
-    //     // updateResultatScoreDisplay();
-    //     // historyColorText();
-    //     // // updateResultPoints();
-    //     // updateResultatPointsDisplay();
-    //     // previewScorePoints();
-    //     // numb25Disab();
-    //     functionActive = true;
-    // }
-
-
-
-
-
-    // if (this.id === 'number27') {
-    //     getMultiplyBy(3);
-    // }
-
-
-
+    // numb25True();
     updateResultatScoreDisplay();
     previewScorePoints();
-
 
     // numberElements.forEach((element, index) => {
     //     // console.log(`--- Перебираем элемент ${index} ---`);
@@ -411,7 +302,6 @@ document.addEventListener('DOMContentLoaded', function () {
             result_set_points.textContent = resultatScore;
             updateResultatPointsDisplay();
             previewScorePoints();
-            numb25Disab();
         });
     }
 })
