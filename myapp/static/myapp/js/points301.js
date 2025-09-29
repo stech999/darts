@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const home_box_countingEl = document.getElementById('home_box_counting')
     const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
 
+    const home_box_input_optionalEl = document.querySelectorAll('div[id^="multi"]');
+
 
     const initialScore = 60;
 
@@ -168,13 +170,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // })
 
-    function minusPoints(point, multi) {
-        if (point <= 25) {
+    function multyPoints(point, multi) {
+        if (point == 'multi2') {
+            
+            resultatPoints.push(point);
 
-            let points = parseInt(point) * multi;
-            resultatPoints.push(points);
-            console.log(`multi: ${multi}`);
-            resultatScore -= points;
+            resultatScore -= point;
 
             updateResultatScoreDisplay();
             historyColorText();
@@ -182,11 +183,40 @@ document.addEventListener('DOMContentLoaded', function () {
             updateResultatPointsDisplay();
             previewScorePoints();
             functionActive = true;
-            proverkaLengthPoints(points);
+            proverkaLengthPoints(point);
+        }
+
+        if (point == 'multi3') {
+            resultatPoints.push(point);
+
+            resultatScore -= point;
+
+            updateResultatScoreDisplay();
+            historyColorText();
+            // updateResultPoints();
+            updateResultatPointsDisplay();
+            previewScorePoints();
+            functionActive = true;
+            proverkaLengthPoints(point);
         }
     }
 
-    function proverkaLengthPoints(points) { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
+    function minusPoints(point, multi) {
+        if (point <= 25) {
+            resultatPoints.push(point);
+            resultatScore -= point;
+
+            updateResultatScoreDisplay();
+            historyColorText();
+            // updateResultPoints();
+            updateResultatPointsDisplay();
+            previewScorePoints();
+            functionActive = true;
+            proverkaLengthPoints(point);
+        }
+    }
+
+    function proverkaLengthPoints(points) { // если длина очков больше 3, то обнуляем и устанавливаем последнюю цифру
         if (resultatPoints.length > 2) {
             resultatPoints = [];
             storeResultat = 0;
@@ -209,55 +239,74 @@ document.addEventListener('DOMContentLoaded', function () {
         el.addEventListener('click', function () {
             if (functionActive === true) {
                 if (el.textContent <= 25) {
+
                     minusPoints(this.textContent, 1);
 
-                    functionActive = true;
+                    // functionActive = true;
                     point25 = false;
                     numb25True();
-                    console.log(`el.textContent: ${el.textContent}`);
                 }
             }
         })
     })
 
-    multi2_el.addEventListener('click', function () {
-        point25 = false;
-        numb25True();
-        functionActive = !functionActive;
+    home_box_input_optionalEl.forEach((element, index) => {
+        element.addEventListener('click', function () {
+            functionActive = !functionActive;
+            if (functionActive === false) {
+                multyPoints(this.id, index + 2);
+                // minusPoints(this.id, index + 2);
 
-        numberElements.forEach(function (el) {
-            el.addEventListener('click', function () {
-                if (functionActive === false) {
+                functionActive = true;
+            }
 
-                    minusPoints(this.textContent, 2);
-                    console.log(`push: 2x`);
-                    
-                }
-            })
+            // const point = 1;
+            // const multy = 2;
+            // test(point, multy);
+            // console.log(`нажата клавиша: ${this.textContent}`);
+
         })
+
     })
 
-    multi3_el.addEventListener('click', function () {
+    // multi2_el.addEventListener('click', function () {
+    //     point25 = false;
+    //     numb25True();
+    //     functionActive = !functionActive;
 
-        functionActive = false;
+    //     numberElements.forEach(function (el) {
+    //         el.addEventListener('click', function () {
+    //             if (functionActive === false) {
 
-        if (this.id == 'multi3') {
-            point25 = true;
-            numb25True();
-        }
-        console.log(`this.id: ${this.id}`);
+    //                 minusPoints(this.textContent, 2);
+    //                 console.log(`push: 2x`);
 
-        numberElements.forEach(function (el) {
-            el.addEventListener('click', function () {
-                if (functionActive === false) {
+    //             }
+    //         })
+    //     })
+    // })
 
-                    minusPoints(this.textContent, 3);
+    // multi3_el.addEventListener('click', function () {
 
-                    console.log(`push: 3x`);
-                }
-            })
-        })
-    })
+    //     functionActive = false;
+
+    //     if (this.id == 'multi3') {
+    //         point25 = true;
+    //         numb25True();
+    //     }
+    //     console.log(`this.id: ${this.id}`);
+
+    //     numberElements.forEach(function (el) {
+    //         el.addEventListener('click', function () {
+    //             if (functionActive === false) {
+
+    //                 minusPoints(this.textContent, 3);
+
+    //                 console.log(`push: 3x`);
+    //             }
+    //         })
+    //     })
+    // })
 
     // numb25True();
     updateResultatScoreDisplay();
