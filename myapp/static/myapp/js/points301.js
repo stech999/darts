@@ -67,37 +67,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000);
     }
 
-    function minusPoints() {
+    function updatePoints(point) {
         updateResultatScoreDisplay();
         historyColorText();
-        // updateResultPoints();
         updateResultatPointsDisplay();
         previewScorePoints();
-        proverkaLengthPoints();
+        proverkaLengthPoints(point);
     }
 
     function proverkaLengthPoints(point) { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
-        if (resultatPoints.length > 2) {
-            resultatPoints = [];
-            storeResultat = 0;
-            return storeResultat;
-        }
-
-        if (resultatPoints.length <= 3) { //  если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
+        if (resultatPoints.length <= 3) { // если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-            // resultatPoints = [];
-            // storeResultat = 0;
-            return storeResultat;
+            console.log(`storeResultat: ${storeResultat}`);
+            // return storeResultat;
         }
-
-
 
         if (point > resultatScore) { // если очков быльше общей суммы, мы возвращаем сумму, а очки обнуляем
-            console.log(`func3: ${resultatScore}`);
-            resultatScore = resultatScore + storeResultat;
+
+            console.log(`func3 point: ${point}`);
+            console.log(`func3 resultatScore: ${resultatScore}`);
+            console.log(`func3 point: ${storeResultat}`);
+            resultatScore += storeResultat;
             resultatPoints = [];
             storeResultat = 0;
-            // return resultatScore;
+            
+            updatePoints();
+            
+        }
+
+        if (resultatPoints.length >= 3) {
+            resultatPoints = [];
+            storeResultat = 0;
+            console.log('func1');
         }
     }
 
@@ -114,8 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 resultatPoints.push(points);
                 resultatScore -= points;
 
-                minusPoints();
-
+                updatePoints(points);
                 point25 = false;
                 numb25True();
             })
