@@ -46,32 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // function updateResultPoints() {
-    //     if (countPoints >= resultatScore) {
-    //         historyEl.classList.remove('home_box_preview_color');
-    //         setTimeout(() => {
-    //             historyEl.classList.add('home_box_preview_error');
-    //         }, 1000);
-    //         setTimeout(() => {
-    //             historyEl.classList.remove('home_box_preview_error');
-    //         }, 3000)
-    //     }
-
-    // }
-
-    // function getMultiplyBy(milti) {
-    //     numberElements.forEach(function (el) {
-    //         el.addEventListener('click', function () {
-    //             let number = parseInt(this.textContent);
-    //             let points = resultatScore - number * milti;
-    //             resultatScore -= points;
-    //             resultatPoints.push(resultatPoints);
-    //             updateResultatScoreDisplay();
-    //             previewScorePoints();
-    //         })
-    //     })
-    // }
-
     function choiseResultatScore() {
         if (resultatScore == 0) {
             champion();
@@ -92,83 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
             historyEl.classList.remove('home_box_preview_color');
         }, 1000);
     }
-
-
-    // numberElements.forEach(function (el) {
-    //     el.addEventListener('click', function () {
-    //         console.log('functionActive: ' + functionActive);
-    //         if (functionActive === true) {
-
-    //             if (this.textContent <= 24) {
-    //                 let points = parseInt(this.textContent);
-    //                 resultatPoints.push(points);
-
-    //                 if (resultatPoints.length > 3) {
-    //                     resultatPoints = [];
-    //                     storeResultat = 0;
-    //                     storeResultat = resultatPoints.push(points);
-    //                 }
-
-    //                 if (resultatPoints.length <= 3) {
-    //                     storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-    //                 }
-
-    //                 if (points > resultatScore) {
-    //                     resultatScore = resultatScore + storeResultat;
-    //                     resultatPoints = [];
-    //                     storeResultat = 0;
-    //                 }
-
-    //                 // countPoints = points;
-    //                 resultatScore -= points;
-
-    //                 updateResultatScoreDisplay();
-    //                 historyColorText();
-    //                 // updateResultPoints();
-    //                 updateResultatPointsDisplay();
-    //                 previewScorePoints();
-    //                 numb25Disab();
-
-    //                 console.log(`function1`);
-    //             }
-
-    //             if (this.textContent == 25) {
-    //                 let points = parseInt(this.textContent);
-    //                 resultatPoints.push(points);
-
-    //                 if (resultatPoints.length > 3) {
-    //                     resultatPoints = [];
-    //                     storeResultat = 0;
-    //                     storeResultat = resultatPoints.push(points);
-    //                 }
-
-    //                 if (resultatPoints.length <= 3) {
-    //                     storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-    //                 }
-
-    //                 if (points >= resultatScore) {
-    //                     resultatScore = resultatScore + storeResultat;
-    //                     resultatPoints = [];
-    //                     storeResultat = 0;
-    //                 }
-
-    //                 // countPoints = 25;
-    //                 resultatScore -= points;
-
-    //                 updateResultatScoreDisplay();
-    //                 numb25True();
-    //                 historyColorText();
-    //                 updateResultatPointsDisplay();
-    //                 // updateResultPoints();
-    //                 previewScorePoints();
-    //             }
-
-    //             console.log('f1: ' + this.textContent);
-    //         }
-
-    //     })
-
-    // })
 
     function minusPoints() {
         updateResultatScoreDisplay();
@@ -238,33 +135,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     number();
-
-
-    // multi3_el.addEventListener('click', function () {
-
-    //     functionActive = false;
-
-    //     if (this.id == 'multi3') {
-    //         point25 = true;
-    //         numb25True();
-    //     }
-    //     console.log(`this.id: ${this.id}`);
-
-    //     numberElements.forEach(function (el) {
-    //         el.addEventListener('click', function () {
-    //             if (functionActive === false) {
-
-    //                 minusPoints(this.textContent, 3);
-
-    //                 console.log(`push: 3x`);
-    //             }
-    //         })
-    //     })
-    // })
-
-    // numb25True();
-
-
     updateResultatScoreDisplay();
     previewScorePoints();
 
