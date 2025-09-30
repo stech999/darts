@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const home_box_countingEl = document.getElementById('home_box_counting')
     const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
 
-    const home_box_input_optionalEl = document.querySelectorAll('div[id^="multi"]');
+    const multi2El = document.getElementById('multi2');
+    // const home_box_input_optionalEl = document.querySelectorAll('div[id^="multi"]');
+    const saveEl = document.getElementById('save');
 
 
     const initialScore = 60;
@@ -170,50 +172,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // })
 
-    function multyPoints(point, multi) {
-        if (point == 'multi2') {
-            
-            resultatPoints.push(point);
+    // function multyPoints(point, multi) {
+    //     if (point == 'multi2') {
 
-            resultatScore -= point;
+    //         resultatPoints.push(point);
 
-            updateResultatScoreDisplay();
-            historyColorText();
-            // updateResultPoints();
-            updateResultatPointsDisplay();
-            previewScorePoints();
-            functionActive = true;
-            proverkaLengthPoints(point);
-        }
+    //         resultatScore -= point;
 
-        if (point == 'multi3') {
-            resultatPoints.push(point);
+    //         updateResultatScoreDisplay();
+    //         historyColorText();
+    //         // updateResultPoints();
+    //         updateResultatPointsDisplay();
+    //         previewScorePoints();
+    //         functionActive = true;
+    //         proverkaLengthPoints(point);
+    //     }
 
-            resultatScore -= point;
+    //     if (point == 'multi3') {
+    //         resultatPoints.push(point);
 
-            updateResultatScoreDisplay();
-            historyColorText();
-            // updateResultPoints();
-            updateResultatPointsDisplay();
-            previewScorePoints();
-            functionActive = true;
-            proverkaLengthPoints(point);
-        }
-    }
+    //         resultatScore -= point;
 
-    function minusPoints(point, multi) {
-        if (point <= 25) {
-            resultatPoints.push(point);
-            resultatScore -= point;
+    //         updateResultatScoreDisplay();
+    //         historyColorText();
+    //         // updateResultPoints();
+    //         updateResultatPointsDisplay();
+    //         previewScorePoints();
+    //         functionActive = true;
+    //         proverkaLengthPoints(point);
+    //     }
+    // }
 
-            updateResultatScoreDisplay();
-            historyColorText();
-            // updateResultPoints();
-            updateResultatPointsDisplay();
-            previewScorePoints();
-            functionActive = true;
-            proverkaLengthPoints(point);
-        }
+    function updatePoints() {
+        updateResultatScoreDisplay();
+        historyColorText();
+        // updateResultPoints();
+        updateResultatPointsDisplay();
+        previewScorePoints();
     }
 
     function proverkaLengthPoints(points) { // если длина очков больше 3, то обнуляем и устанавливаем последнюю цифру
@@ -235,39 +230,90 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+
+    function test(aaa) {
+        console.log(`true / false: ${aaa} == ${functionActive}`);
+    }
+
+    saveEl.addEventListener('click', () => {
+        console.log(`save`);
+    })
+
     numberElements.forEach(function (el) {
         el.addEventListener('click', function () {
+            functionActive = true;
             if (functionActive === true) {
                 if (el.textContent <= 25) {
+                    let point = parseInt(this.textContent);
+                    // proverkaLengthPoints(point); // кажется нужно добавить проверку на функцию
 
-                    minusPoints(this.textContent, 1);
+                    // resultatPoints.push(point);
+                    resultatScore -= point;
+                    console.log(`number: ${point}`);
 
-                    // functionActive = true;
+                    updatePoints();
                     point25 = false;
                     numb25True();
+                    test('numberElements');
                 }
             }
-        })
-    })
-
-    home_box_input_optionalEl.forEach((element, index) => {
-        element.addEventListener('click', function () {
-            functionActive = !functionActive;
-            if (functionActive === false) {
-                multyPoints(this.id, index + 2);
-                // minusPoints(this.id, index + 2);
-
-                functionActive = true;
-            }
-
-            // const point = 1;
-            // const multy = 2;
-            // test(point, multy);
-            // console.log(`нажата клавиша: ${this.textContent}`);
-
+            functionActive = false;
         })
 
     })
+
+    multi2El.addEventListener('click', function () {
+        functionActive = false;
+        if (functionActive === false) {
+            numberElements.forEach(function (el) {
+                el.addEventListener('click', function () {
+                    let point = parseInt(this.textContent);
+                    if (point <= 25) {
+
+                        // proverkaLengthPoints(point); // кажется нужно добавить проверку на функцию
+
+                        resultatScore -= point * 2;
+                        console.log(`point: ${point * 2}`);
+                        // resultatPoints.push(point);
+
+                        updatePoints();
+                        point25 = false;
+                        numb25True();
+
+                        test('multi2El');
+                    }
+                })
+            })
+            functionActive = false;
+        }
+    })
+
+    // home_box_input_optionalEl.forEach((element, multy) => {
+    //     element.addEventListener('click', function () {
+    //         functionActive = true;
+    //         if (functionActive === true) {
+    //             numberElements.forEach(function (el) {
+    //                 el.addEventListener('click', function () {
+    //                     let point = parseInt(this.textContent);
+    //                     if (point <= 25) {
+
+    //                         // proverkaLengthPoints(point); // кажется нужно добавить проверку на функцию
+
+    //                         resultatScore -= point * (multy + 2);
+    //                         console.log(`point: ${point * (multy + 2)}`);
+    //                         // resultatPoints.push(point);
+
+    //                         updatePoints();
+    //                         point25 = false;
+    //                         numb25True();
+    //                         test();
+    //                     }
+    //                 })
+    //             })
+    //             functionActive = false;
+    //         }
+    //     })
+    // })
 
     // multi2_el.addEventListener('click', function () {
     //     point25 = false;
@@ -309,6 +355,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // })
 
     // numb25True();
+
     updateResultatScoreDisplay();
     previewScorePoints();
 
