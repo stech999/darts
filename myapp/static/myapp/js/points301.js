@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const home_box_countingEl = document.getElementById('home_box_counting')
     const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
 
+    const multi2El = document.getElementById('multi2');
+    // const home_box_input_optionalEl = document.querySelectorAll('div[id^="multi"]');
+    const saveEl = document.getElementById('save');
+
 
     const initialScore = 60;
 
