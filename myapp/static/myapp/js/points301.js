@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const initialScore = 60;
 
-    let functionActive = true;
-
     let resultatScore = 60;
     let resultatPoints = [];
     let point25 = false;
@@ -168,25 +166,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // })
 
-    function minusPoints(point, multi) {
-        if (point <= 25) {
-
-            let points = parseInt(point) * multi;
-            resultatPoints.push(points);
-            console.log(`multi: ${multi}`);
-            resultatScore -= points;
-
-            updateResultatScoreDisplay();
-            historyColorText();
-            // updateResultPoints();
-            updateResultatPointsDisplay();
-            previewScorePoints();
-            functionActive = true;
-            proverkaLengthPoints(points);
-        }
+    function minusPoints() {
+        updateResultatScoreDisplay();
+        historyColorText();
+        // updateResultPoints();
+        updateResultatPointsDisplay();
+        previewScorePoints();
+        proverkaLengthPoints();
     }
 
-    function proverkaLengthPoints(points) { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
+    function proverkaLengthPoints(point) { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
         if (resultatPoints.length > 2) {
             resultatPoints = [];
             storeResultat = 0;
@@ -195,71 +184,83 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (resultatPoints.length <= 3) { //  если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
+            // resultatPoints = [];
+            // storeResultat = 0;
             return storeResultat;
         }
 
-        if (points > resultatScore) { // если очков быльше общей суммы, мы возвращаем сумму, а очки обнуляем
+
+
+        if (point > resultatScore) { // если очков быльше общей суммы, мы возвращаем сумму, а очки обнуляем
+            console.log(`func3: ${resultatScore}`);
             resultatScore = resultatScore + storeResultat;
             resultatPoints = [];
             storeResultat = 0;
+            // return resultatScore;
         }
     }
 
-    numberElements.forEach(function (el) {
-        el.addEventListener('click', function () {
-            if (functionActive === true) {
-                if (el.textContent <= 25) {
-                    minusPoints(this.textContent, 1);
-
-                    functionActive = true;
-                    point25 = false;
-                    numb25True();
-                    console.log(`el.textContent: ${el.textContent}`);
-                }
-            }
-        })
-    })
-
-    multi2_el.addEventListener('click', function () {
-        point25 = false;
-        numb25True();
-        functionActive = !functionActive;
-
+    function number() {
+        let multi = 1;
         numberElements.forEach(function (el) {
             el.addEventListener('click', function () {
-                if (functionActive === false) {
-
-                    minusPoints(this.textContent, 2);
-                    console.log(`push: 2x`);
-                    
+                let points = parseInt(this.textContent);
+                if (multi > 1) {
+                    points *= multi;
+                    multi = 1;
                 }
+
+                resultatPoints.push(points);
+                resultatScore -= points;
+
+                minusPoints();
+
+                point25 = false;
+                numb25True();
             })
         })
-    })
 
-    multi3_el.addEventListener('click', function () {
+        multi2_el.addEventListener('click', function () {
+            multi = 2;
+            point25 = false;
+            numb25True();
+        })
 
-        functionActive = false;
-
-        if (this.id == 'multi3') {
+        multi3_el.addEventListener('click', function () {
+            multi = 3;
             point25 = true;
             numb25True();
-        }
-        console.log(`this.id: ${this.id}`);
-
-        numberElements.forEach(function (el) {
-            el.addEventListener('click', function () {
-                if (functionActive === false) {
-
-                    minusPoints(this.textContent, 3);
-
-                    console.log(`push: 3x`);
-                }
-            })
         })
-    })
+    }
+
+    number();
+
+
+    // multi3_el.addEventListener('click', function () {
+
+    //     functionActive = false;
+
+    //     if (this.id == 'multi3') {
+    //         point25 = true;
+    //         numb25True();
+    //     }
+    //     console.log(`this.id: ${this.id}`);
+
+    //     numberElements.forEach(function (el) {
+    //         el.addEventListener('click', function () {
+    //             if (functionActive === false) {
+
+    //                 minusPoints(this.textContent, 3);
+
+    //                 console.log(`push: 3x`);
+    //             }
+    //         })
+    //     })
+    // })
 
     // numb25True();
+
+
     updateResultatScoreDisplay();
     previewScorePoints();
 
