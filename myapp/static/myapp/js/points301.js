@@ -12,15 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const home_box_countingEl = document.getElementById('home_box_counting')
     const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
 
-    const multi2El = document.getElementById('multi2');
-    // const home_box_input_optionalEl = document.querySelectorAll('div[id^="multi"]');
-    const saveEl = document.getElementById('save');
-
-
     const initialScore = 60;
 
     let resultatScore = 60;
+    let storeResultatScore = 60;
+
     let resultatPoints = [];
+
     let point25 = false;
     let storeResultat = 0;
 
@@ -76,29 +74,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function proverkaLengthPoints(point) { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
-        if (resultatPoints.length <= 3) { // если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
+        if (resultatPoints.length < 4) { // если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
-            console.log(`storeResultat: ${storeResultat}`);
-            // return storeResultat;
+            storeResultatScore -= storeResultat;
+            if (resultatPoints.length == 3) {
+                resultatPoints = [];
+            }
         }
 
-        if (point > resultatScore) { // если очков быльше общей суммы, мы возвращаем сумму, а очки обнуляем
-
-            console.log(`func3 point: ${point}`);
-            console.log(`func3 resultatScore: ${resultatScore}`);
-            console.log(`func3 point: ${storeResultat}`);
+        if (resultatScore < 0) {
             resultatScore += storeResultat;
+            storeResultatScore += storeResultat;
             resultatPoints = [];
             storeResultat = 0;
-            
             updatePoints();
-            
-        }
-
-        if (resultatPoints.length >= 3) {
-            resultatPoints = [];
-            storeResultat = 0;
-            console.log('func1');
         }
     }
 
@@ -144,8 +133,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //     // console.log('ID элемента:', element.id);     // Получаем ID (например, "number0")
     //     // console.log('Текст элемента:', element.textContent); // Получаем текст (например, "0")
     //     // console.log('Класс элемента:', element.className); // Получаем классы (например, "home_box_input_btn")
-
-
 
     function champion() {
         champion_textEl.textContent = 'Чемпион Красавчик !!!';
