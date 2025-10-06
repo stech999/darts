@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateResultatScoreDisplay() {
         result_set_points.textContent = resultatScore;
-        choiseResultatScore();
     }
 
     function updateResultatPointsDisplay() {
@@ -41,12 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
             home_box_countingEl.style.display = 'none';
             home_box_preview_finishEl.classList.remove('blinking-active');
             home_box_preview_finishEl.textContent = '';
-        }
-    }
-
-    function choiseResultatScore() {
-        if (resultatScore == 0) {
-            champion();
         }
     }
 
@@ -73,6 +66,24 @@ document.addEventListener('DOMContentLoaded', function () {
         proverkaLengthPoints();
     }
 
+    function checkPoints(multi) {
+        if (multi == 2) {
+            if (resultatScore == 0) {
+                champion();
+            }
+        }
+
+        if (multi == 3) {
+            if (resultatScore == 0) {
+                updatePoints();
+                resultatScore += storeResultat;
+                storeResultatScore += storeResultat;
+                resultatPoints = [];
+                storeResultat = 0;
+            }
+        }
+    }
+
     function proverkaLengthPoints() { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
         if (resultatPoints.length < 4) { // если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
@@ -82,13 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        if (resultatScore < 0) {
+        if (resultatScore < -1) {
             resultatScore += storeResultat;
             storeResultatScore += storeResultat;
             resultatPoints = [];
             storeResultat = 0;
             updatePoints();
         }
+
     }
 
     function number() {
@@ -96,23 +108,40 @@ document.addEventListener('DOMContentLoaded', function () {
         numberElements.forEach(function (el) {
             el.addEventListener('click', function () {
                 let points = parseInt(this.textContent);
+
+                if (multi == 1) {
+                    resultatPoints.push(points);
+                    resultatScore -= points;
+                    // resultatPoints.push(`${points / 2}ᴰ`);
+                }
+
                 if (multi > 1) {
                     points *= multi;
+
                     if (multi == 2) {
-                        resultatPoints.push(`${points / 2}ᴰ`);
+                        resultatPoints.push(points);
+                        resultatScore -= points;
+                        checkPoints(multi);
+                        // resultatPoints.push(`${points / 2}ᴰ`);
                     }
 
                     if (multi == 3) {
-                        resultatPoints.push(`${points / 3}ᵀ`);
+                        resultatPoints.push(points);
+                        resultatScore -= points;
+                        checkPoints(multi);
+                        // resultatPoints.push(`${points / 3}ᵀ`);
                     }
-                    
+
                     multi = 1;
                 }
-                else {
-                    resultatPoints.push(points);
-                }
 
-                resultatScore -= points;
+
+                // else {
+                //     resultatPoints.push(points);
+                // }
+
+                // resultatPoints.push(points);
+                // resultatScore -= points;
 
                 updatePoints();
                 point25 = false;
@@ -130,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
             multi = 3;
             point25 = true;
             numb25True();
+
         })
     }
 
