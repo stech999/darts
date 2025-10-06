@@ -98,10 +98,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 let points = parseInt(this.textContent);
                 if (multi > 1) {
                     points *= multi;
+                    if (multi == 2) {
+                        resultatPoints.push(`${points / 2}ᴰ`);
+                    }
+
+                    if (multi == 3) {
+                        resultatPoints.push(`${points / 3}ᵀ`);
+                    }
+                    
                     multi = 1;
                 }
+                else {
+                    resultatPoints.push(points);
+                }
 
-                resultatPoints.push(points);
                 resultatScore -= points;
 
                 updatePoints(points);
