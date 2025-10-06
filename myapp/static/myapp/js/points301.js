@@ -65,15 +65,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000);
     }
 
-    function updatePoints(point) {
+    function updatePoints() {
         updateResultatScoreDisplay();
         historyColorText();
         updateResultatPointsDisplay();
         previewScorePoints();
-        proverkaLengthPoints(point);
+        proverkaLengthPoints();
     }
 
-    function proverkaLengthPoints(point) { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
+    function proverkaLengthPoints() { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
         if (resultatPoints.length < 4) { // если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
             storeResultat = resultatPoints.reduce((accum, currentValue) => accum + currentValue, 0);
             storeResultatScore -= storeResultat;
@@ -98,13 +98,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 let points = parseInt(this.textContent);
                 if (multi > 1) {
                     points *= multi;
+                    
                     multi = 1;
                 }
 
                 resultatPoints.push(points);
                 resultatScore -= points;
 
-                updatePoints(points);
+                updatePoints();
                 point25 = false;
                 numb25True();
             })
