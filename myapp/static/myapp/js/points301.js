@@ -11,11 +11,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const multi3_el = document.getElementById('multi3');
     const home_box_countingEl = document.getElementById('home_box_counting')
     const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
+    const numberChoiceEl = document.getElementById('numberChoice');
 
-    const initialScore = 60;
+    let showNumberEl = document.getElementById('showNumber');
 
-    let resultatScore = 60;
-    let storeResultatScore = 60;
+    const btnEl = document.getElementById('btn');
+
+    let initialScore = 0;
+
+    let resultatScore = 0;
+    let storeResultatScore = 0;
 
     let resultatPoints = [];
 
@@ -66,6 +71,34 @@ document.addEventListener('DOMContentLoaded', function () {
         proverkaLengthPoints();
     }
 
+    function choiceGame() {
+
+        // const selectedGame = numberChoiceEl.options[numberChoiceEl.selectedIndex].text;
+
+        numberChoiceEl.addEventListener('change', function () {
+
+            const selectedGame = parseInt(this.value, 10);
+
+            if (selectedGame === 301 || selectedGame === 501) {
+                showNumberEl.textContent = selectedGame;
+                console.log(`selectedGame: ${selectedGame}`);
+            }
+        })
+    }
+
+    choiceGame();
+
+
+    function checkScore() {
+        if (resultatScore == 1) {
+            updatePoints();
+            resultatScore += storeResultat;
+            storeResultatScore += storeResultat;
+            resultatPoints = [];
+            storeResultat = 0;
+        }
+    }
+
     function checkPoints(multi) {
         if (multi == 2) {
             if (resultatScore == 0) {
@@ -100,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function () {
             storeResultat = 0;
             updatePoints();
         }
-
     }
 
     function number() {
@@ -116,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 if (multi > 1) {
+
                     points *= multi;
 
                     if (multi == 2) {
@@ -135,14 +168,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     multi = 1;
                 }
 
-
-                // else {
-                //     resultatPoints.push(points);
-                // }
-
                 // resultatPoints.push(points);
                 // resultatScore -= points;
-
+                checkScore();
                 updatePoints();
                 point25 = false;
                 numb25True();

@@ -65,9 +65,25 @@ a {
     justify-content: center;
 }
 
+#numberChoice {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #de722a;
+    background: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-repeat: no-repeat;
+    background-size: 12px auto;
+}
+
 .home_choice {
     display: flex;
     justify-content: center;
+    padding-bottom: 20px;
 }
 
 .home_box {
