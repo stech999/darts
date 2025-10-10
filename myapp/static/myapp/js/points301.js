@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const result_set_points = document.getElementById('result_set_points');
+    const result_set_points_nikolay = document.getElementById('result_set_points_nikolay');
     const result_set_points_champion = document.getElementById('champion');
     const champion_textEl = document.getElementById('champion_text');
     const cub_championEl = document.getElementById('cub_champion');
@@ -11,24 +11,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const multi3_el = document.getElementById('multi3');
     const home_box_countingEl = document.getElementById('home_box_counting')
     const home_box_preview_finishEl = document.getElementById('home_box_preview_finish');
-    const numberChoiceEl = document.getElementById('numberChoice');
 
-    let showNumberEl = document.getElementById('showNumber');
 
-    const btnEl = document.getElementById('btn');
+    let inputNumbEl = document.getElementById('inputNumb');
+    let applyNumberBtnEl = document.getElementById('applyNumberBtn');
 
-    let initialScore = 0;
+    let inputFlug = false; // для активации поля ввода очков
 
-    let resultatScore = 0;
-    let storeResultatScore = 0;
+    let initialScore = 301;
 
+    let resultatScore = 301;
+    let storeResultatScore = 301;
     let resultatPoints = [];
-
-    let point25 = false;
     let storeResultat = 0;
 
+    let point25 = false;
+
     function updateResultatScoreDisplay() {
-        result_set_points.textContent = resultatScore;
+        result_set_points_nikolay.textContent = resultatScore;
     }
 
     function updateResultatPointsDisplay() {
@@ -40,8 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             home_box_countingEl.style.display = 'flex';
             home_box_preview_finishEl.classList.add('blinking-active');
             home_box_preview_finishEl.textContent = resultatScore / 2;
-        }
-        else {
+        } else {
             home_box_countingEl.style.display = 'none';
             home_box_preview_finishEl.classList.remove('blinking-active');
             home_box_preview_finishEl.textContent = '';
@@ -72,22 +71,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function choiceGame() {
-
-        // const selectedGame = numberChoiceEl.options[numberChoiceEl.selectedIndex].text;
-
-        numberChoiceEl.addEventListener('change', function () {
-
-            const selectedGame = parseInt(this.value, 10);
-
-            if (selectedGame === 301 || selectedGame === 501) {
-                showNumberEl.textContent = selectedGame;
-                console.log(`selectedGame: ${selectedGame}`);
+        applyNumberBtnEl.addEventListener('click', function () {
+            if (inputFlug === true) {
+                let inputValue = parseInt(inputNumbEl.value, 10);
+                initialScore = inputValue;
+                resultatScore = inputValue;
+                updatePoints()
+                inputFlug = false;
+                inputNumbEl.classList.add('blinkInput');
             }
         })
     }
-
-    choiceGame();
-
 
     function checkScore() {
         if (resultatScore == 1) {
@@ -191,16 +185,16 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
+    inputNumbEl.addEventListener('focus', function () {
+        inputFlug = true;
+        inputNumbEl.value = '';
+        resultatPoints = [];
+        choiceGame();
+    })
+
     number();
     updateResultatScoreDisplay();
     previewScorePoints();
-
-    // numberElements.forEach((element, index) => {
-    //     // console.log(`--- Перебираем элемент ${index} ---`);
-    //     // console.log('Найденный элемент:', element); // Полный HTML-элемент
-    //     // console.log('ID элемента:', element.id);     // Получаем ID (например, "number0")
-    //     // console.log('Текст элемента:', element.textContent); // Получаем текст (например, "0")
-    //     // console.log('Класс элемента:', element.className); // Получаем классы (например, "home_box_input_btn")
 
     function champion() {
         champion_textEl.textContent = 'Чемпион Красавчик !!!';
@@ -229,9 +223,16 @@ document.addEventListener('DOMContentLoaded', function () {
             result_set_points_champion.style.display = 'none';
             resultatPoints = [];
             resultatScore = initialScore;
-            result_set_points.textContent = resultatScore;
+            result_set_points_nikolay.textContent = resultatScore;
             updateResultatPointsDisplay();
             previewScorePoints();
         });
     }
 })
+
+// numberElements.forEach((element, index) => {
+//     // console.log(`--- Перебираем элемент ${index} ---`);
+//     // console.log('Найденный элемент:', element); // Полный HTML-элемент
+//     // console.log('ID элемента:', element.id);     // Получаем ID (например, "number0")
+//     // console.log('Текст элемента:', element.textContent); // Получаем текст (например, "0")
+//     // console.log('Класс элемента:', element.className); // Получаем классы (например, "home_box_input_btn")

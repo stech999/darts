@@ -65,7 +65,23 @@ a {
     justify-content: center;
 }
 
-#numberChoice {
+.inputNumb {
+    padding: 5px 5px;
+    width: 70px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #de722a;
+    background: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.applyNumberBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -73,17 +89,39 @@ a {
     color: #de722a;
     background: none;
     cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-repeat: no-repeat;
-    background-size: 12px auto;
 }
+
+@keyframes blink_once {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+        background: none;
+    }
+}
+
+.blinkInput {
+    background-color: #007bff;
+
+    animation-name: blink_once;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
 
 .home_choice {
     display: flex;
     justify-content: center;
     padding-bottom: 20px;
+    gap: 15px;
 }
 
 .home_box {

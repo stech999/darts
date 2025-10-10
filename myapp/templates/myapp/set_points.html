@@ -5,15 +5,8 @@
 {% block content %}
 
 <div class="home_choice">
-
-    <select id="numberChoice">
-        <option value="301">301</option>
-        <option value="501">501</option>
-        <!-- <option value="other"></option> -->
-    </select>
-    <div id="showNumber"></div>
-
-    <!-- <button id="btn">push</button> -->
+    <input class="inputNumb" type="text" id="inputNumb">
+    <button class="applyNumberBtn" id="applyNumberBtn">Применить</button>
 
 </div>
 <div id="champion" class="champion">
@@ -24,10 +17,10 @@
 <div class="home_center">
     <div class="home_box">
         <div class="home_box_name_points">
-            <div class="home_box_name">Niko</div>
+            <div class="home_box_name">Николай</div>
             <div class="home_box_line"></div>
             <div class="home_box_points">
-                <div id="result_set_points"></div>
+                <div id="result_set_points_nikolay"></div>
             </div>
         </div>
         <div class="home_box_count_points">
@@ -75,14 +68,13 @@
     </div>
     <div class="home_center_line"></div> <!-- line-->
     <div class="home_box">
-        <div class="home_box_name">Красавчик</div>
-        <div class="home_box_points">
-            <p>301</p>
+        <div class="home_box_name_points">
+            <div class="home_box_name">Николай</div>
+            <div class="home_box_line"></div>
+            <div class="home_box_points">
+                <div id="result_set_points"></div>
+            </div>
         </div>
-        <div class="home_box_preview">
-            <p>Д20 | 10 | 15</p>
-        </div>
-        <div class="home_box_input"></div>
     </div>
 </div>
 {% endblock %}
