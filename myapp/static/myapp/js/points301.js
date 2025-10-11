@@ -1,18 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
     const result_set_points_nikolay = document.getElementById('result_set_points_nikolay');
-    const result_set_points_krasavchik = document.getElementById('result_set_points_krasavchik');
+    const result_set_points_krasavchick = document.getElementById('result_set_points_krasavchick');
+
     const result_set_points_champion = document.getElementById('champion');
     const champion_textEl = document.getElementById('champion_text');
     const cub_championEl = document.getElementById('cub_champion');
     const champion_btn_closeEl = document.getElementById('champion_btn_close');
+
     let numberElements = document.querySelectorAll("[id^='number']");
     const number25El = document.getElementById('number25');
     const multi2_el = document.getElementById('multi2');
     const multi3_el = document.getElementById('multi3');
-    let historynikolay = document.getElementById('historynikolay');
-    const homeBoxCountingNikolayEl = document.getElementById('homeBoxCountingNikolay')
-    const homeBoxPreviewFinishNikolay = document.getElementById('homeBoxPreviewFinishNikolay');
 
+    let historynikolay = document.getElementById('historynikolay');
+    let historykrasavchick = document.getElementById('historykrasavchick');
+
+    const homeBoxCountingNikolayEl = document.getElementById('homeBoxCountingNikolay')
+    const homeBoxCountingkrasavchick = document.getElementById('homeBoxCountingkrasavchick')
+
+    const homeBoxPreviewFinishNikolay = document.getElementById('homeBoxPreviewFinishNikolay');
+    const homeBoxPreviewFinishkrasavchick = document.getElementById('homeBoxPreviewFinishkrasavchick');
 
     let inputNumbEl = document.getElementById('inputNumb');
     let applyNumberBtnEl = document.getElementById('applyNumberBtn');
@@ -29,34 +36,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let resultatScoreKrasavchick = 301; // krasavchick
     let storeResultatScoreKrasavchick = 301; // krasavchick
-    let resultatPointsKrasavchick = []; // krasavchick
+    let resultatPointsKrasavchick = []; // resultatScoreKrasavchick
     let storeResultatKrasavchick = 0; // krasavchick
 
     let point25 = false;
 
     function updateResultatScoreDisplay() {
-        if (choiseUser === 'nikolay') {
-            result_set_points_nikolay.textContent = resultatScoreNikolay;
-        }
-
-        if (choiseUser === 'krasavchick') {
-            result_set_points_krasavchik.textContent = resultatScoreNikolay;
-        }
+        result_set_points_nikolay.textContent = resultatScoreNikolay;
+        result_set_points_krasavchick.textContent = resultatScoreKrasavchick;
     }
 
     function updateResultatPointsDisplay() {
         historynikolay.textContent = resultatPointsNikolay.join(' | ');
+        historykrasavchick.textContent = resultatPointsKrasavchick.join(' | ');
     }
 
     function previewScorePoints() {
-        if (resultatScoreNikolay % 2 === 0 && resultatScoreNikolay <= 50) {
-            homeBoxCountingNikolayEl.style.display = 'flex';
-            homeBoxPreviewFinishNikolay.classList.add('blinking-active');
-            homeBoxPreviewFinishNikolay.textContent = resultatScoreNikolay / 2;
-        } else {
-            homeBoxCountingNikolayEl.style.display = 'none';
-            homeBoxPreviewFinishNikolay.classList.remove('blinking-active');
-            homeBoxPreviewFinishNikolay.textContent = '';
+        if (choiseUser === 'nikolay') {
+            if (resultatScoreNikolay % 2 === 0 && resultatScoreNikolay <= 50) {
+                homeBoxCountingNikolayEl.style.display = 'flex';
+                homeBoxPreviewFinishNikolay.classList.add('blinking-active');
+                homeBoxPreviewFinishNikolay.textContent = resultatScoreNikolay / 2;
+            } else {
+                homeBoxCountingNikolayEl.style.display = 'none';
+                homeBoxPreviewFinishNikolay.classList.remove('blinking-active');
+                homeBoxPreviewFinishNikolay.textContent = '';
+            }
+        }
+
+        if (choiseUser === 'krasavchick') {
+            if (resultatScoreKrasavchick % 2 === 0 && resultatScoreKrasavchick <= 50) {
+                homeBoxCountingkrasavchick.style.display = 'flex';
+                homeBoxPreviewFinishkrasavchick.classList.add('blinking-active');
+                homeBoxPreviewFinishkrasavchick.textContent = resultatScoreKrasavchick / 2;
+            } else {
+                homeBoxCountingkrasavchick.style.display = 'none';
+                homeBoxPreviewFinishkrasavchick.classList.remove('blinking-active');
+                homeBoxPreviewFinishkrasavchick.textContent = '';
+            }
         }
     }
 
@@ -69,10 +86,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function historyColorText() {
-        historynikolay.classList.add('home_box_preview_color');
-        setTimeout(() => {
-            historynikolay.classList.remove('home_box_preview_color');
-        }, 1000);
+        if (choiseUser === 'nikolay') {
+            historynikolay.classList.add('home_box_preview_color');
+            setTimeout(() => {
+                historynikolay.classList.remove('home_box_preview_color');
+            }, 1000);
+        }
+        if (choiseUser === 'krasavchick') {
+            historykrasavchick.classList.add('home_box_preview_color');
+            setTimeout(() => {
+                historykrasavchick.classList.remove('home_box_preview_color');
+            }, 1000);
+        }
     }
 
     function updatePoints() {
@@ -88,7 +113,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (inputFlug === true) {
                 let inputValue = parseInt(inputNumbEl.value, 10);
                 initialScore = inputValue;
+                resultatScoreKrasavchick = inputValue;
                 resultatScoreNikolay = inputValue;
+
                 updatePoints()
                 inputFlug = false;
                 inputNumbEl.classList.add('blinkInput');
@@ -97,24 +124,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function checkScore() {
-        if (resultatScoreNikolay == 1) {
-            updatePoints();
-            resultatScoreNikolay += storeResultatNikolay;
-            storeResultatScoreNikolay += storeResultatNikolay;
-            resultatPointsNikolay = [];
-            storeResultatNikolay = 0;
-        }
-    }
-
-    function checkPoints(multi) {
-        if (multi == 2) {
-            if (resultatScoreNikolay == 0) {
-                champion();
-            }
-        }
-
-        if (multi == 3) {
-            if (resultatScoreNikolay == 0) {
+        if (choiseUser === 'nikolay') {
+            if (resultatScoreNikolay == 1) {
                 updatePoints();
                 resultatScoreNikolay += storeResultatNikolay;
                 storeResultatScoreNikolay += storeResultatNikolay;
@@ -122,26 +133,92 @@ document.addEventListener('DOMContentLoaded', function () {
                 storeResultatNikolay = 0;
             }
         }
+
+        if (choiseUser === 'krasavchick') {
+            if (resultatScoreKrasavchick == 1) {
+                updatePoints();
+                resultatScoreKrasavchick += storeResultatKrasavchick;
+                storeResultatScoreKrasavchick += storeResultatKrasavchick;
+                resultatPointsKrasavchick = [];
+                storeResultatKrasavchick = 0;
+            }
+        }
     }
 
-    function proverkaLengthPoints() { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
-        // if (choiseUser === 'nikolay') {
+    function checkPoints(multi) {
+        if (choiseUser === 'nikolay') {
+            if (multi == 2) {
+                if (resultatScoreNikolay == 0) {
+                    champion('Николай');
+                }
+            }
 
-        // }
-        if (resultatPointsNikolay.length < 4) { // если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
-            storeResultatNikolay = resultatPointsNikolay.reduce((accum, currentValue) => accum + currentValue, 0);
-            storeResultatScoreNikolay -= storeResultatNikolay;
-            if (resultatPointsNikolay.length == 3) {
-                resultatPointsNikolay = [];
+            if (multi == 3) {
+                if (resultatScoreNikolay == 0) {
+                    updatePoints();
+                    resultatScoreNikolay += storeResultatNikolay;
+                    storeResultatScoreNikolay += storeResultatNikolay;
+                    resultatPointsNikolay = [];
+                    storeResultatNikolay = 0;
+                }
             }
         }
 
-        if (resultatScoreNikolay < -1) {
-            resultatScoreNikolay += storeResultatNikolay;
-            storeResultatScoreNikolay += storeResultatNikolay;
-            resultatPointsNikolay = [];
-            storeResultatNikolay = 0;
-            updatePoints();
+        if (choiseUser === 'krasavchick') {
+            if (multi == 2) {
+                if (resultatScoreKrasavchick == 0) {
+                    champion('Красавчик');
+                }
+            }
+
+            if (multi == 3) {
+                if (resultatScoreKrasavchick == 0) {
+                    updatePoints();
+                    resultatScoreKrasavchick += storeResultatKrasavchick;
+                    storeResultatScoreKrasavchick += storeResultatKrasavchick;
+                    resultatPointsKrasavchick = [];
+                    storeResultatKrasavchick = 0;
+                }
+            }
+        }
+    }
+
+    function proverkaLengthPoints() { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
+        if (choiseUser === 'nikolay') {
+            if (resultatPointsNikolay.length < 4) { // если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
+                storeResultatNikolay = resultatPointsNikolay.reduce((accum, currentValue) => accum + currentValue, 0);
+                storeResultatScoreNikolay -= storeResultatNikolay;
+                if (resultatPointsNikolay.length == 3) {
+                    resultatPointsNikolay = [];
+                    choiseUser = 'krasavchick';
+                }
+            }
+
+            if (resultatScoreNikolay < -1) {
+                resultatScoreNikolay += storeResultatNikolay;
+                storeResultatScoreNikolay += storeResultatNikolay;
+                resultatPointsNikolay = [];
+                storeResultatNikolay = 0;
+                updatePoints();
+            }
+        }
+        if (choiseUser === 'krasavchick') {
+            if (resultatPointsKrasavchick.length < 4) { // если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
+                storeResultatKrasavchick = resultatPointsKrasavchick.reduce((accum, currentValue) => accum + currentValue, 0);
+                storeResultatScoreKrasavchick -= storeResultatKrasavchick;
+                if (resultatPointsKrasavchick.length == 3) {
+                    resultatPointsKrasavchick = [];
+                    choiseUser = 'nikolay';
+                }
+            }
+
+            if (resultatScoreKrasavchick < -1) {
+                resultatScoreKrasavchick += storeResultatKrasavchick;
+                storeResultatScoreKrasavchick += storeResultatKrasavchick;
+                resultatPointsKrasavchick = [];
+                storeResultatKrasavchick = 0;
+                updatePoints();
+            }
         }
     }
 
@@ -151,35 +228,56 @@ document.addEventListener('DOMContentLoaded', function () {
             el.addEventListener('click', function () {
                 let points = parseInt(this.textContent);
 
-                if (multi == 1) {
-                    resultatPointsNikolay.push(points);
-                    resultatScoreNikolay -= points;
-                    // resultatPointsNikolay.push(`${points / 2}ᴰ`);
-                }
-
-                if (multi > 1) {
-
-                    points *= multi;
-
-                    if (multi == 2) {
+                if (choiseUser === 'nikolay') {
+                    if (multi == 1) {
                         resultatPointsNikolay.push(points);
                         resultatScoreNikolay -= points;
-                        checkPoints(multi);
-                        // resultatPointsNikolay.push(`${points / 2}ᴰ`);
                     }
 
-                    if (multi == 3) {
-                        resultatPointsNikolay.push(points);
-                        resultatScoreNikolay -= points;
-                        checkPoints(multi);
-                        // resultatPointsNikolay.push(`${points / 3}ᵀ`);
-                    }
+                    if (multi > 1) {
+                        points *= multi;
+                        if (multi == 2) {
+                            resultatPointsNikolay.push(points);
+                            resultatScoreNikolay -= points;
+                            checkPoints(multi);
+                        }
 
-                    multi = 1;
+                        if (multi == 3) {
+                            resultatPointsNikolay.push(points);
+                            resultatScoreNikolay -= points;
+                            checkPoints(multi);
+                        }
+
+                        multi = 1;
+                    }
                 }
 
-                // resultatPointsNikolay.push(points);
-                // resultatScoreNikolay -= points;
+                if (choiseUser === 'krasavchick') {
+                    if (multi == 1) {
+                        resultatPointsKrasavchick.push(points);
+                        resultatScoreKrasavchick -= points;
+                    }
+
+                    if (multi > 1) {
+                        points *= multi;
+                        if (multi == 2) {
+                            resultatPointsKrasavchick.push(points);
+                            resultatScoreKrasavchick -= points;
+                            checkPoints(multi);
+                        }
+
+                        if (multi == 3) {
+                            resultatPointsKrasavchick.push(points);
+                            resultatScoreKrasavchick -= points;
+                            checkPoints(multi);
+                        }
+
+                        multi = 1;
+                    }
+                }
+
+
+
                 checkScore();
                 updatePoints();
                 point25 = false;
@@ -205,6 +303,7 @@ document.addEventListener('DOMContentLoaded', function () {
         inputFlug = true;
         inputNumbEl.value = '';
         resultatPointsNikolay = [];
+        resultatPointsKrasavchick = [];
         choiceGame();
     })
 
@@ -212,8 +311,8 @@ document.addEventListener('DOMContentLoaded', function () {
     updateResultatScoreDisplay();
     previewScorePoints();
 
-    function champion() {
-        champion_textEl.textContent = 'Чемпион Красавчик !!!';
+    function champion(name) {
+        champion_textEl.textContent = `Чемпион ${name} !!!`;
         result_set_points_champion.style.display = 'flex';
         champion_btn_closeEl.textContent = 'Закрыть';
         cub_championEl.style.display = 'flex';
@@ -238,8 +337,13 @@ document.addEventListener('DOMContentLoaded', function () {
         champion_btn_closeEl.addEventListener('click', function () {
             result_set_points_champion.style.display = 'none';
             resultatPointsNikolay = [];
+            resultatPointsKrasavchick = [];
             resultatScoreNikolay = initialScore;
+            resultatScoreKrasavchick = initialScore;
             result_set_points_nikolay.textContent = resultatScoreNikolay;
+            result_set_points_krasavchick.textContent = resultatScoreKrasavchick;
+            console.log(`resultatScoreNikolay: ${resultatScoreNikolay}`);
+            console.log(`resultatScoreKrasavchick: ${resultatScoreKrasavchick}`);
             updateResultatPointsDisplay();
             previewScorePoints();
         });
