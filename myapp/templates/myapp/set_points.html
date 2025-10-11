@@ -1,13 +1,13 @@
 {% extends 'myapp/base.html' %}
+{% load static %}
 
 {% block title %}Набор очков{% endblock %}
 
 {% block content %}
-
+<link rel="stylesheet" href="{% static 'myapp/css/style.css' %}">
 <div class="home_choice">
     <input class="inputNumb" type="text" id="inputNumb">
     <button class="applyNumberBtn" id="applyNumberBtn">Применить</button>
-
 </div>
 
 <div id="champion" class="champion">
@@ -16,24 +16,54 @@
     <div id="champion_btn_close" class="champion_btn_close"></div>
 </div>
 <div class="home_center">
-    <div class="home_box">
-        <div class="home_box_name_points">
-            <div class="home_box_name">Николай</div>
-            <div class="home_box_line"></div>
-            <div class="home_box_points">
-                <div id="result_set_points_nikolay"></div>
+    <div class="home_points">
+        <div id="userNikolay" class=""></div>
+        <div id="userKrasavchick" class=""></div>
+
+        <div class="home_box">
+            <div class="home_box_name_points">
+                <div class="home_box_name">Николай</div>
+                <div class="home_box_line"></div>
+                <div class="home_box_points">
+                    <div id="result_set_points_nikolay"></div>
+                </div>
+            </div>
+            <div class="home_box_count_points">
+                <div class="home_box_counting_points">
+                    <div class="home_box_counting_name">Очки</div>
+                    <div id="historynikolay" class="home_box_preview"></div>
+                </div>
+                <div id="homeBoxCountingNikolay" class="home_box_counting">
+                    <div class="home_box_counting_name">Завершение</div>
+                    <div id="homeBoxPreviewFinishNikolay" class="home_box_preview_finish blinking-number"></div>
+                </div>
             </div>
         </div>
-        <div class="home_box_count_points">
-            <div class="home_box_counting_points">
-                <div class="home_box_counting_name">Очки</div>
-                <div id="historynikolay" class="home_box_preview"></div>
+
+        <div class="home_center_line"></div> <!-- line right / left -->
+
+        <div class="home_box">
+            <div class="home_box_name_points">
+                <div class="home_box_name">Красавчик</div>
+                <div class="home_box_line"></div>
+                <div class="home_box_points">
+                    <div id="result_set_points_krasavchick"></div>
+                </div>
             </div>
-            <div id="homeBoxCountingNikolay" class="home_box_counting">
-                <div class="home_box_counting_name">Завершение</div>
-                <div id="homeBoxPreviewFinishNikolay" class="home_box_preview_finish blinking-number"></div>
+            <div class="home_box_count_points">
+                <div class="home_box_counting_points">
+                    <div class="home_box_counting_name">Очки</div>
+                    <div id="historykrasavchick" class="home_box_preview"></div>
+                </div>
+                <div id="homeBoxCountingkrasavchick" class="home_box_counting">
+                    <div class="home_box_counting_name">Завершение</div>
+                    <div id="homeBoxPreviewFinishkrasavchick" class="home_box_preview_finish blinking-number"></div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <div class="home_box_inp">
         <div class="home_box_input">
             <div id="number0" class="home_box_input_btn">0</div>
             <div id="number1" class="home_box_input_btn">1</div>
@@ -62,32 +92,12 @@
             <div id="number24" class="home_box_input_btn">24</div>
             <div id="number25" class="home_box_input_btn">25</div>
         </div>
+
         <div class="home_box_input_optional">
             <div id="multi2" class="home_box_input_btn">Удвоение 2Х</div>
             <div id="multi3" class="home_box_input_btn">Утроение 3Х</div>
         </div>
     </div>
-    
-    <div class="home_center_line"></div> <!-- line right / left -->
 
-    <div class="home_box">
-        <div class="home_box_name_points">
-            <div class="home_box_name">Красавчик</div>
-            <div class="home_box_line"></div>
-            <div class="home_box_points">
-                <div id="result_set_points_krasavchick"></div>
-            </div>
-        </div>
-        <div class="home_box_count_points">
-            <div class="home_box_counting_points">
-                <div class="home_box_counting_name">Очки</div>
-                <div id="historykrasavchick" class="home_box_preview"></div>
-            </div>
-            <div id="homeBoxCountingkrasavchick" class="home_box_counting">
-                <div class="home_box_counting_name">Завершение</div>
-                <div id="homeBoxPreviewFinishkrasavchick" class="home_box_preview_finish blinking-number"></div>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock %}

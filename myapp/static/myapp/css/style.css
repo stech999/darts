@@ -12,8 +12,6 @@ body {
     margin: 0;
 }
 
-
-
 h1 {
     color: rgb(147, 147, 221);
 }
@@ -21,7 +19,6 @@ h1 {
 a {
     color: rgb(3, 175, 3);
 }
-
 
 .wrapper {
     display: flex;
@@ -63,6 +60,7 @@ a {
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .inputNumb {
@@ -86,9 +84,17 @@ a {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 20px;
-    color: #de722a;
+    color: #ffffff;
     background: none;
     cursor: pointer;
+}
+
+.applyNumberBtn:hover {
+    background-color: blueviolet;
+}
+
+.applyNumberBtn:active {
+    background-color: #3e8e41;
 }
 
 @keyframes blink_once {
@@ -124,12 +130,43 @@ a {
     gap: 15px;
 }
 
+.home_points {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
 .home_box {
     display: flex;
     justify-content: flex-start;
     width: 100%;
     flex-direction: column;
     align-items: center;
+}
+
+.userNikolay {
+
+    position: absolute;
+    top: -21px;
+    left: 530px;
+    width: 100px;
+    height: 100px;
+    background-image: url(../images/drotik.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(180deg);
+}
+
+.userKrasavchick {
+
+    position: absolute;
+    top: -21px;
+    right: 530px;
+    width: 100px;
+    height: 100px;
+    background-image: url(../images/drotik.gif);
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .home_box_count_points {
@@ -304,11 +341,18 @@ a {
     border-right: 1px solid rgb(3, 175, 3);
 }
 
+.home_box_inp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+}
+
 .home_box_input {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    width: 55%;
+    width: 490px;
     font-size: 26px;
     justify-content: center;
 }
@@ -317,7 +361,6 @@ a {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    width: 55%;
     font-size: 26px;
     justify-content: center;
     padding-top: 5px;

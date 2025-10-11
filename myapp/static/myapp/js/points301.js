@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let inputNumbEl = document.getElementById('inputNumb');
     let applyNumberBtnEl = document.getElementById('applyNumberBtn');
 
+    const userNikolay = document.getElementById('userNikolay');
+    const userKrasavchick = document.getElementById('userKrasavchick');
+
+
     let inputFlug = false; // для активации поля ввода очков
     let choiseUser = 'nikolay'; // krasavchick
 
@@ -52,28 +56,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function previewScorePoints() {
-        if (choiseUser === 'nikolay') {
-            if (resultatScoreNikolay % 2 === 0 && resultatScoreNikolay <= 50) {
-                homeBoxCountingNikolayEl.style.display = 'flex';
-                homeBoxPreviewFinishNikolay.classList.add('blinking-active');
-                homeBoxPreviewFinishNikolay.textContent = resultatScoreNikolay / 2;
-            } else {
-                homeBoxCountingNikolayEl.style.display = 'none';
-                homeBoxPreviewFinishNikolay.classList.remove('blinking-active');
-                homeBoxPreviewFinishNikolay.textContent = '';
-            }
+        if (resultatScoreNikolay % 2 === 0 && resultatScoreNikolay <= 50) {
+            homeBoxCountingNikolayEl.style.display = 'flex';
+            homeBoxPreviewFinishNikolay.classList.add('blinking-active');
+            homeBoxPreviewFinishNikolay.textContent = resultatScoreNikolay / 2;
+        } else {
+            homeBoxCountingNikolayEl.style.display = 'none';
+            homeBoxPreviewFinishNikolay.classList.remove('blinking-active');
+            homeBoxPreviewFinishNikolay.textContent = '';
         }
 
-        if (choiseUser === 'krasavchick') {
-            if (resultatScoreKrasavchick % 2 === 0 && resultatScoreKrasavchick <= 50) {
-                homeBoxCountingkrasavchick.style.display = 'flex';
-                homeBoxPreviewFinishkrasavchick.classList.add('blinking-active');
-                homeBoxPreviewFinishkrasavchick.textContent = resultatScoreKrasavchick / 2;
-            } else {
-                homeBoxCountingkrasavchick.style.display = 'none';
-                homeBoxPreviewFinishkrasavchick.classList.remove('blinking-active');
-                homeBoxPreviewFinishkrasavchick.textContent = '';
-            }
+        if (resultatScoreKrasavchick % 2 === 0 && resultatScoreKrasavchick <= 50) {
+            homeBoxCountingkrasavchick.style.display = 'flex';
+            homeBoxPreviewFinishkrasavchick.classList.add('blinking-active');
+            homeBoxPreviewFinishkrasavchick.textContent = resultatScoreKrasavchick / 2;
+        } else {
+            homeBoxCountingkrasavchick.style.display = 'none';
+            homeBoxPreviewFinishkrasavchick.classList.remove('blinking-active');
+            homeBoxPreviewFinishkrasavchick.textContent = '';
         }
     }
 
@@ -108,6 +108,15 @@ document.addEventListener('DOMContentLoaded', function () {
         proverkaLengthPoints();
     }
 
+    function choiseUserGIF() {
+        if (choiseUser === 'nikolay') {
+            userNikolay.classList.add('userNikolay');
+        }
+        if (choiseUser === 'krasavchick') {
+            userKrasavchick.classList.add('userKrasavchick');
+        }
+    }
+
     function choiceGame() {
         applyNumberBtnEl.addEventListener('click', function () {
             if (inputFlug === true) {
@@ -116,9 +125,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 resultatScoreKrasavchick = inputValue;
                 resultatScoreNikolay = inputValue;
 
-                updatePoints()
                 inputFlug = false;
+
                 inputNumbEl.classList.add('blinkInput');
+                setTimeout(() => {
+                    inputNumbEl.classList.remove('blinkInput');
+                }, 1000);
+                updatePoints()
             }
         })
     }
@@ -191,6 +204,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (resultatPointsNikolay.length == 3) {
                     resultatPointsNikolay = [];
                     choiseUser = 'krasavchick';
+                    userNikolay.classList.remove('userNikolay');
+                    userKrasavchick.classList.add('userKrasavchick');
                 }
             }
 
@@ -209,6 +224,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (resultatPointsKrasavchick.length == 3) {
                     resultatPointsKrasavchick = [];
                     choiseUser = 'nikolay';
+                    userKrasavchick.classList.remove('userKrasavchick');
+                    userNikolay.classList.add('userNikolay');
                 }
             }
 
@@ -307,9 +324,11 @@ document.addEventListener('DOMContentLoaded', function () {
         choiceGame();
     })
 
+
     number();
     updateResultatScoreDisplay();
     previewScorePoints();
+    choiseUserGIF()
 
     function champion(name) {
         champion_textEl.textContent = `Чемпион ${name} !!!`;
