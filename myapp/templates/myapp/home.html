@@ -4,5 +4,18 @@
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
-<h1>Добро пожаловать на главную страницу!</h1>
+
+{% if user.is_authenticated %}
+
+{% if user.first_name %}
+<h1>Добро пожаловать, {{ user.first_name }}!</h1>
+{% else %}
+<h1>Добро пожаловать, {{ user.username }}!</h1>
+{% endif %}
+
+{% else %}
+<p>Пожалуйста, авторизуйтесь.</p>
+
+{% endif %}
+
 {% endblock %}

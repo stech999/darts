@@ -3,5 +3,46 @@
 {% block title %}Статистика{% endblock %}
 
 {% block content %}
-    <h1>Статистика</h1>
+<h1>Статистика игрока: {{ user.first_name }} (На сегодня: {{ today }})</h1>
+
+<h2>Общая статистика</h2>
+{% if overall_stats.total_points %}
+<p>Сумма очков за всё время: <strong>{{ overall_stats.total_points|default:0 }}</strong></p>
+<p>Общее количество побед: <strong>{{ overall_stats.total_wins|default:0 }}</strong></p>
+{% else %}
+<p>Статистика пока пуста.</p>
+{% endif %}
+
+<hr>
+
+<h2>Статистика по играм</h2>
+{% if stats_by_game %}
+<ul>
+    {% for stat in stats_by_game %}
+    <li>
+        Игра: <strong>{{ stat.game__name }}</strong> |
+        Сумма очков: {{ stat.game_points }} |
+        Победы: {{ stat.game_wins }}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Нет данных по играм.</p>
+{% endif %}
+
+<hr>
+
+<h2>Анализ бросков (Попадания в сектора)</h2>
+{% if throw_counts %}
+<p>Показывает, сколько раз вы попадали в определенное количество очков:</p>
+<ul>
+    {% for item in throw_counts %}
+    <li>
+        Попадание в сектор <strong>{{ item.points }}</strong> очков: <strong>{{ item.count }}</strong> раз(а)
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Пока нет данных по отдельным броскам.</p>
+{% endif %}
 {% endblock %}

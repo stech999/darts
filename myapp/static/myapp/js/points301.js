@@ -196,6 +196,56 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    async function jsonAwait(point) {
+        try {
+            const response = await fetch('/api/save-data/', { // URL вашего эндпоинта
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken') // Добавляем CSRF-токен
+                },
+                body: JSON.stringify({
+                    points: point
+                }) // Отправляем очки в JSON
+            });
+
+            if (!response.ok) {
+                // Попытка получить сообщение об ошибке от сервера
+                let errorData = {
+                    message: `HTTP error! status: ${response.status}`
+                };
+                try {
+                    errorData = await response.json();
+                } catch (e) {
+                    // Если ответ не JSON, используем стандартное сообщение
+                }
+                throw new Error(errorData.error || errorData.message); // Выбрасываем ошибку с сообщением от сервера
+            }
+
+            const data = await response.json();
+            console.log('Ответ от сервера:', data);
+            alert(`Вы попали на ${point} очков!`);
+        } catch (err) {
+            console.error('Произошла ошибка:', err.message); // Выводим более конкретное сообщение об ошибке
+            alert(`Произошла ошибка при записи очков: ${err.message}`);
+        }
+    }
+
     function proverkaLengthPoints() { // если длина очков больше 3, то обнуляем и кстанавливаем последнюю цифру
         if (choiseUser === 'nikolay') {
             if (resultatPointsNikolay.length < 4) { // если длина выпавших чисел меньше или ровно, то суммируем выпавшие числа
@@ -247,6 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (choiseUser === 'nikolay') {
                     if (multi == 1) {
+                        jsonAwait(points);
                         resultatPointsNikolay.push(points);
                         resultatScoreNikolay -= points;
                     }

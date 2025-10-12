@@ -1,0 +1,48 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+
+<h1>Авторизация</h1>
+
+{# Отображение сообщений об ошибках, если они есть #}
+{% if form.errors %}
+<p style="color: red;">Ваше имя пользователя или пароль были введены неверно. Попробуйте снова.</p>
+{% endif %}
+
+{# Отображение сообщения, если пользователь вышел #}
+{% if next %}
+<p>Пожалуйста, войдите, чтобы получить доступ к этой странице.</p>
+{% endif %}
+
+<form method="post" action="{% url 'login' %}"> {# Форма отправляет POST-запрос на URL, определенный как 'login' #}
+    {% csrf_token %} {# Обязательно для безопасности #}
+
+    {# Поле для имени пользователя #}
+    <div>
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <br>
+
+    {# Поле для пароля #}
+    <div>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <br>
+
+    {# Скрытое поле для перенаправления после успешного входа (если нужно) #}
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+
+    <button type="submit">Войти</button>
+</form>
+
+{# Можно добавить ссылку на регистрацию, если она у вас есть #}
+<p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a></p>
+
+
+{% endblock %}

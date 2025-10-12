@@ -10,7 +10,13 @@
         <a href="{% url 'cricket' %}">Cricket</a> |
         <a href="{% url 'free_set_points' %}">Набор очков</a> |
         <a href="{% url 'statistics' %}">Статистика</a> |
-        <a href="{% url 'users' %}">Пользователи</a>
+        <a href="{% url 'users' %}">Пользователи</a> |
+        <a href="{% url 'admin:index' %}" target="_blank">Admin</a> |
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="background: none; border: none;">Выход</button>
+        </form>
+
     </div>
 
 </header>
