@@ -21,7 +21,14 @@
 
         <div class="home_box">
             <div class="home_box_name_points">
-                <div class="home_box_name">Николай</div>
+                <!-- <div class="home_box_name">Николай</div> -->
+                <div class="home_box_name">
+                    <select id="user1" class="home_box_name">
+                        {% for user in users %}
+                        <option value="{{ user.first_name }}">{{ user.first_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
                 <div class="home_box_line"></div>
                 <div class="home_box_points">
                     <div id="result_set_points_nikolay"></div>
@@ -43,7 +50,12 @@
 
         <div class="home_box">
             <div class="home_box_name_points">
-                <div class="home_box_name">Красавчик</div>
+                <!-- <div class="home_box_name">Красавчик</div> -->
+                <select id="user2" class="home_box_name">
+                    {% for user in users %}
+                    <option value="{{ user.first_name }}">{{ user.first_name }}</option>
+                    {% endfor %}
+                </select>
                 <div class="home_box_line"></div>
                 <div class="home_box_points">
                     <div id="result_set_points_krasavchick"></div>

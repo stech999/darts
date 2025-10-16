@@ -248,7 +248,10 @@ a {
 }
 
 .home_box_name {
-    font-size: 44px;
+    background: none;
+    font-size: 40px;
+    color: #539e24;
+    border: none;
 }
 
 .home_box_line {

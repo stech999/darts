@@ -27,9 +27,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const userNikolay = document.getElementById('userNikolay');
     const userKrasavchick = document.getElementById('userKrasavchick');
 
+    const user1 = document.getElementById('user1');
+    const user2 = document.getElementById('user2');
 
     let inputFlug = false; // для активации поля ввода очков
+
     let choiseUser = 'nikolay'; // krasavchick
+
+    let choiseUser1 = user1.value; // krasavchick
+    let choiseUser2 = user2.value; // krasavchick
+console.log(`choiseUser1 = ${choiseUser1} | choiseUser2 = ${choiseUser2}`);
 
     let initialScore = 301;
 
@@ -237,9 +244,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error(errorData.error || errorData.message); // Выбрасываем ошибку с сообщением от сервера
             }
 
-            const data = await response.json();
-            console.log('Ответ от сервера:', data);
-            alert(`Вы попали на ${point} очков!`);
+            // const data = await response.json();
+            // console.log('Ответ от сервера:', data);
+            // alert(`Вы попали на ${point} очков!`);
         } catch (err) {
             console.error('Произошла ошибка:', err.message); // Выводим более конкретное сообщение об ошибке
             alert(`Произошла ошибка при записи очков: ${err.message}`);

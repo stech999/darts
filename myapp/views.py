@@ -45,7 +45,14 @@ def register_view(request):
 def set_points(request):
     if not request.user.is_authenticated:
         return redirect('login')
-    return render(request, 'myapp/set_points.html')
+    
+    users = User.objects.all()
+
+    context = {
+        'users': users,
+    }
+
+    return render(request, 'myapp/set_points.html', context)
 
 
 def cricket(request):
@@ -101,6 +108,9 @@ def statistics(request):
 
 
 def users(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     users = User.objects.all()
     context = {
         'user': users,
